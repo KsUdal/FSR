@@ -1,4 +1,6 @@
 all: main.o
-	gcc main.o -o main
-main.o: main.c stb_image.h
+	gcc main.o -o main.exe
+main.o:
 	gcc -c main.c
+clean:
+	rm *o
