@@ -1,9 +1,11 @@
-#include "stb_image.h"
-#include "stb_image_write.h"
-#include "stb_image_resize.h"
-#include <strings.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <strings.h>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#define STB_INAGE_WRITH_IMPLEMENTATION
+#include "stb_image_write.h"
 
 // Макроподстановка, меняющая p(i, j) на  idata[(i)+(j)*iw]
 
@@ -12,7 +14,7 @@
 int main() {
 
     // строка, путь к файлу
-    char*inputPath = "~/work/hampster.png";
+    char*inputPath = "hampster.png";
     int iw, ih, n; //ширина, высота и количество цветовых каналов
 
     // Загружаем изображение, чтобы получить информацию о ширине, высоте и цветовом канале
@@ -60,6 +62,6 @@ int main() {
 
     printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
-    stbi_image_free(idata);
+    //stbi_image_free(idata);
     return 0;
 }
