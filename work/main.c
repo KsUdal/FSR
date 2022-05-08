@@ -43,18 +43,17 @@ int main() {
             y = -MyImage[iw*(i-1)+(j-1)] - 2*MyImage[iw*(i-1)+j] - MyImage[iw*(i-1)+(j+1)];
             y = y + MyImage[iw*(i+1)+(j-1)] + 2*MyImage[iw*(i+1)+j] + MyImage[iw*(i+1)+(j+1)];
             s = sqrt(x*x + y*y);
-            odata[iw*i+j] = s*(MyImage[iw*i+j] - 128);
+            odata[iw*i+j] = s;
         }
     }
-    /*
+
     //coloring
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
+            if (odata[iw*i+j] < 112) odata[iw*i+j] = 0;
+            if (odata[iw*i+j] > 156) odata[iw*i+j] = 255;
         }
     }
-    */
 
     char* outputPath = "output.png";
     // записываем картинку
