@@ -46,9 +46,8 @@ int main() {
     }
     */
 
-    /*
+
     //фильтр Собеля
-    int j;
     unsigned char x, y;
     for (i = iw+1; i < ih*iw-iw-1; i++) {
         //for (j = 1; j < iw - 1; j++) {
@@ -59,7 +58,6 @@ int main() {
             MyImage[i] = sqrt(x*x + y*y);
         //}
     }
-    */
 
 
     //Sobel Filter second part
