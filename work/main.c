@@ -36,57 +36,21 @@ int main() {
     //coloring
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 175) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
         }
     }
 
-    int pixels[ih][iw];
-    float t, angle;
-    for (i = 0; i < ih*iw; i++) {
-        k = i/iw;
-        pixels[k][i-iw*k] = MyImage[i];
-    }
-    int xi, yi;
-    for (i = 1; i < ih-1; i++) {
-        for (j = 1; j < iw-1; j++) {
-            //xi = pixels[i-1][j-1] + 2*pixels[i-1][j] + pixels[i-1][j+1];
-            //xi = xi - pixels[i+1][j-1] - 2*pixels[i+1][j] - pixels[i+1][j+1];
-            //yi = pixels[i-1][j-1] + 2*pixels[i][j-1] + pixels[i+1][j-1];
-            //yi = yi - pixels[i-1][j+1] - 2*pixels[i][j+1] - pixels[i+1][j+1];
-            //angle = yi; angle = angle/xi;
-            //t = sqrt(xi*xi + yi*yi)*sin(angle)/cos(angle);
-            t = pixels[i-1][j-1]+pixels[i-1][j]-pixels[i-1][j+1]-pixels[i][j+1]+pixels[i+1][j+1]+pixels[i+1][j];
-            t = t-pixels[i+1][j-1]-pixels[i][j-1];
-            pixels[i][j] = fabs(t);
-            //MyImage[i*ih+j] = pixels[i][j];
-        }
-    }
-
-    for (i = 0; i < ih*iw; i++) {
-        k = i/iw;
-        MyImage[i] = pixels[k][i-iw*k];
-    }
-
-    /*
     //Sobel
-    unsigned char x, y, s;
-    for (i = 2; i < ih - 1; i++) {
-        for (j = 2; j < iw - 1; j++) {
-            x = -MyImage[(i-1)+(j-1)*ih] - MyImage[i+(j-1)*ih] - MyImage[(i+1)+(j-1)*ih];
-            x = x + MyImage[(i-1)+(j+1)*ih] + MyImage[i+(j+1)*ih] + MyImage[(i+1)+(j+1)*ih];
-            y = -MyImage[(i-1)+(j-1)*ih] - MyImage[(i-1)+j*ih] - MyImage[(i-1)+(j+1)*ih];
-            y = y + MyImage[(i+1)+(j-1)*ih] + MyImage[(i+1)+j*ih] + MyImage[(i+1)+(j+1)*ih];
-            s = sqrt(x*x + y*y);
-            if (s > 255) {
-                MyImage[i+j*ih] = 255;
-            }
-            else {
-                MyImage[i+j*ih] = s;
-            }
+    unsigned char x, y;
+    for (i = 2; i < ih; i++) {
+        for (j = 2; j < iw; j++) {
+            x = MyImage[iw*i+j] - MyImage[iw*(i-1)+j];
+            y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
+            MyImage[i*j] = sqrt(x*x + y*y);
         }
     }
-    */
+
 
     char* outputPath = "output.png";
     // записываем картинку
