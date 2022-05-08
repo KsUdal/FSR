@@ -46,6 +46,13 @@ int main() {
     }
     */
 
+    //Sobel Filter second part
+    for (i = 0; i < ih; i++) {
+        for (j = 0; j < iw; j++) {
+            if (MyImage[iw*i+j] < 128) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 128) MyImage[iw*i+j] = 255;
+        }
+    }
 
     //фильтр Собеля
     unsigned char x, y;
@@ -59,7 +66,7 @@ int main() {
         //}
     }
 
-
+    /*
     //Sobel Filter second part
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
@@ -67,6 +74,7 @@ int main() {
             if (MyImage[iw*i+j] > 128) MyImage[iw*i+j] = 255;
         }
     }
+    */
 
 
     char* outputPath = "output.png";
