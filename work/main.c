@@ -32,7 +32,7 @@ int main() {
         MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
-    /*
+
     //coloring
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
@@ -40,23 +40,17 @@ int main() {
             if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
         }
     }
-    */
 
-    //Roberts
-    unsigned char x, y;
-    for (i = 2; i < ih; i++) {
-        for (j = 2; j < iw; j++) {
-            x = MyImage[iw*i+j] - MyImage[iw*(i-1)+j];
-            y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
-            MyImage[i*j] = sqrt(x*x + y*y);
-        }
-    }
-
-    //coloring
-    for (i = 0; i < ih; i++) {
-        for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
+    //Sobel
+    unsigned char x, y, s;
+    for (i = 2; i < ih - 1; i++) {
+        for (j = 2; j < iw - 1; j++) {
+            x = -MyImage[(i-1)+(j-1)*ih] - MyImage[i+(j-1)*ih] - MyImage[(i+1)+(j-1)*ih];
+            x = x + MyImage[(i-1)+(j+1)*ih] + MyImage[i+(j+1)*ih] + MyImage[(i+1)+(j+1)*ih];
+            y = -MyImage[(i-1)+(j-1)*ih] - MyImage[(i-1)+j*ih] - MyImage[(i-1)+(j+1)*ih];
+            y = y + MyImage[(i+1)+(j-1)*ih] + MyImage[(i+1)+j*ih] + MyImage[(i+1)+(j+1)*ih];
+            s = sqrt(x*x + y*y);
+            MyImage[i+j*ih] = MyImage[i + j*ih] - s;
         }
     }
 
