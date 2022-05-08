@@ -25,15 +25,28 @@ int main() {
         return 1;
     }
 
-    int i, k;
+    int i, k, j;
     k = 0;
     unsigned char* MyImage = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < ih*iw*n; i = i + n) {
         MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
-    //unsigned char* odata = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
 
+    /*
+    int pixels[ih][iw]
+    for (i = 0; i < ih*iw; i++) {
+        k = i/iw;
+        pixels[k][i-iw*k] = MyImage[i];
+    }
+
+    int j;
+    for (i = 0; i < ih; i++) {
+        for
+    }
+    */
+
+    /*
     //фильтр Собеля
     int j;
     unsigned char x, y;
@@ -44,83 +57,18 @@ int main() {
             y = -MyImage[i-iw-1] - 2*MyImage[i-1] - MyImage[i+iw-1];
             y = y + MyImage[i-iw+1] + 2*MyImage[i+1] + MyImage[i+iw+1];
             MyImage[i] = sqrt(x*x + y*y);
-            //if (MyImage[i*j] < 64) MyImage[i*j] = 64;
-            //if (MyImage[i*j] > 192) MyImage[i*j] = 192;
-            //if ((MyImage[i*j] < 128) && (MyImage[i*j] > 64)) MyImage[i*j] = MyImage[i*j] - 64;
-            //if ((MyImage[i*j] < 192) && (MyImage[i*j] > 128)) MyImage[i*j] = MyImage[i*j] + 64;
-            //odata[iw*i+j] = sqrt(x*x + y*y);
         //}
     }
+    */
 
     //Sobel Filter second part
-    for (i = 0; i < ih-1; i++) {
-        for (j = 0; j < iw-1; j++) {
-            if (MyImage[iw*i+j] < 0) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 255) MyImage[iw*i+j] = 255;
+    for (i = 0; i < ih; i++) {
+        for (j = 0; j < iw; j++) {
+            if (MyImage[iw*i+j] < 16) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 16) MyImage[iw*i+j] = 255;
         }
     }
 
-    /*
-    //non Sobel part
-    for (i = 1; i < iw-1; i++) {
-        for (j = 1; j < ih-1; j++) {
-            if ((MyImage[(i-1)*j] - MyImage[i*j]) < 128) MyImage[(i-1)*j] = MyImage[i*j];
-            if ((MyImage[(i+1)*j] - MyImage[i*j]) < 128) MyImage[(i+1)*j] = MyImage[i*j];
-            if ((MyImage[i*(j-1)] - MyImage[i*j]) < 128) MyImage[i*(j-1)] = MyImage[i*j];
-            if ((MyImage[i*(j+1)] - MyImage[i*j]) < 128) MyImage[i*(j+1)] = MyImage[i*j];
-        }
-    }
-
-    //фильтр Собеля 2
-    //int j;
-    //unsigned char x, y;
-    for (i = 1; i < iw - 1; i++) {
-        for (j = 1; j < ih - 1; j++) {
-            x = -MyImage[(i-1)*(j-1)] - 2*MyImage[i*(j-1)] - MyImage[(i+1)*(j-1)];
-            x = x + MyImage[(i-1)*(j+1)] + 2*MyImage[i*(j+1)] + MyImage[(i+1)*(j+1)];
-            y = -MyImage[(i-1)*(j-1)] - 2*MyImage[(i-1)*j] - MyImage[(i-1)*(j+1)];
-            y = y + MyImage[(i+1)*(j-1)] + 2*MyImage[(i+1)*j] + MyImage[(i+1)*(j+1)];
-            MyImage[i*j] = sqrt(x*x + y*y);
-            //if (MyImage[i*j] < 64) MyImage[i*j] = 64;
-            //if (MyImage[i*j] > 192) MyImage[i*j] = 192;
-            //if ((MyImage[i*j] < 128) && (MyImage[i*j] > 64)) MyImage[i*j] = MyImage[i*j] - 64;
-            //if ((MyImage[i*j] < 192) && (MyImage[i*j] > 128)) MyImage[i*j] = MyImage[i*j] + 64;
-            //odata[iw*i+j] = sqrt(x*x + y*y);
-        }
-    }
-    */
-
-    /*
-    //Демонстрационные опыты для семинара
-    char * pixel = idata;
-    // char red = pixel[0];
-    // char blue = pixel[1];
-    // char green = pixel[2];
-
-    // переход к следующему пикселю - сдвиг на количество байтов, равное числу каналов.
-    // В нашем случае n=3
-    pixel = pixel + n;
-
-    // здесь используется макроподстановка #define - см выше
-    char * pixel = p(i, j);
-
-    unsigned char* odata = (unsigned char *) malloc(iw * ih * n);
-
-    // обзор окрестности размера d=3 относительно данного пикселя.
-    // Осторожно - есть шанс вылезти за границы массива-изображения!
-
-    int d = 3;
-    for (int s = -d; s <= d; s++) {
-        for (int t = -d; t<= d; t++) {
-            p1 = p(i + s, j+ t);
-            // мы считаем пороговое значение по красному каналу = 20.
-            // Параметрами можно играть самостоятельно!
-            if (abs (p1[0] - p[0] ) < 20 ) {
-                ...
-            }
-        }
-    }
-    */
     char* outputPath = "output.png";
     // записываем картинку
     int one = 1; int zero = 0;
