@@ -47,6 +47,14 @@ int main() {
         }
     }
 
+    //coloring
+    for (i = 2; i < ih-1; i++) {
+        for (j = 2; j < iw-1; j++) {
+            if (odata[iw*i+j] < 112) odata[iw*i+j] = 0;
+            if (odata[iw*i+j] > 156) odata[iw*i+j] = 255;
+        }
+    }
+
     char* outputPath = "output.png";
     // записываем картинку
     int one = 1; int zero = 0;
