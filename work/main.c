@@ -80,6 +80,7 @@ int main() {
     }
     */
 
+    /*
     //Sobel Filter second part
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
@@ -87,6 +88,7 @@ int main() {
             if (MyImage[iw*i+j] > 128) MyImage[iw*i+j] = 255;
         }
     }
+    */
 
     unsigned char x, y;
     for (i = 2; i < iw - 1; i++) {
@@ -99,6 +101,15 @@ int main() {
             //odata[iw*i+j] = sqrt(x*x + y*y);
         }
     }
+
+    //Sobel Filter second part
+    for (i = 0; i < ih; i++) {
+        for (j = 0; j < iw; j++) {
+            if (MyImage[iw*i+j] < 128) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 128) MyImage[iw*i+j] = 255;
+        }
+    }
+
 
     char* outputPath = "output.png";
     // записываем картинку
