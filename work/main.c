@@ -42,7 +42,7 @@ int main() {
     }
 
     int pixels[ih][iw];
-    float t;
+    float t, angle;
     for (i = 0; i < ih*iw; i++) {
         k = i/iw;
         pixels[k][i-iw*k] = MyImage[i];
@@ -54,7 +54,8 @@ int main() {
             xi = xi - pixels[i+1][j-1] - 2*pixels[i+1][j] - pixels[i+1][j+1];
             yi = pixels[i-1][j-1] + 2*pixels[i][j-1] + pixels[i+1][j-1];
             yi = yi - pixels[i-1][j+1] - 2*pixels[i][j+1] - pixels[i+1][j+1];
-            t = sqrt(xi*xi + yi*yi);
+            angle = yi; angle = angle/xi;
+            t = sqrt(xi*xi + yi*yi)*sin(angle)/cos(angle);
             pixels[i][j] = fabs(t);
             //MyImage[i*ih+j] = pixels[i][j];
         }
