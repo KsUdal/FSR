@@ -45,12 +45,12 @@ int main() {
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
         for (j = 2; j < iw - 1; j++) {
-            x = -MyImage[(i-1)+(j-1)*ih] - MyImage[i+(j-1)*ih] - MyImage[(i+1)+(j-1)*ih];
-            x = x + MyImage[(i-1)+(j+1)*ih] + MyImage[i+(j+1)*ih] + MyImage[(i+1)+(j+1)*ih];
-            y = -MyImage[(i-1)+(j-1)*ih] - MyImage[(i-1)+j*ih] - MyImage[(i-1)+(j+1)*ih];
-            y = y + MyImage[(i+1)+(j-1)*ih] + MyImage[(i+1)+j*ih] + MyImage[(i+1)+(j+1)*ih];
+            x = -MyImage[iw*(i-1)+(j-1)] - MyImage[iw*i+(j-1)] - MyImage[iw*(i+1)+(j-1)];
+            x = x + MyImage[iw*(i-1)+(j+1)] + MyImage[iw*i+(j+1)] + MyImage[iw*(i+1)+(j+1)];
+            y = -MyImage[iw*(i-1)+(j-1)] - MyImage[(i-1)*iw+j] - MyImage[iw*(i-1)+(j+1)];
+            y = y + MyImage[iw*(i+1)+(j-1)] + MyImage[(i+1)*iw+j] + MyImage[iw*(i+1)+(j+1)];
             s = sqrt(x*x + y*y);
-            MyImage[i+j*ih] = MyImage[i + j*ih] + s;
+            MyImage[iw*i+j] = MyImage[iw*i + j] - s;
         }
     }
 
