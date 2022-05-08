@@ -48,6 +48,14 @@ int main() {
         }
     }
 
+    //Sobel Filter second part
+    for (i = 0; i < iw; i++) {
+        for (j = 0; j < ih; j++) {
+            if (MyImage[i*j] < 0) MyImage[i*j] = 0;
+            if (MyImage[i*j] > 255) MyImage[i*j] = 255;
+        }
+    }
+
     /*
     //Демонстрационные опыты для семинара
     char * pixel = idata;
