@@ -42,15 +42,20 @@ int main() {
     }
 
     //Sobel
-    unsigned char x, y;
+    unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
         for (j = 2; j < iw - 1; j++) {
             x = -MyImage[(i-1)+(j-1)*ih] - MyImage[i+(j-1)*ih] - MyImage[(i+1)+(j-1)*ih];
             x = x + MyImage[(i-1)+(j+1)*ih] + MyImage[i+(j+1)*ih] + MyImage[(i+1)+(j+1)*ih];
             y = -MyImage[(i-1)+(j-1)*ih] - MyImage[(i-1)+j*ih] - MyImage[(i-1)+(j+1)*ih];
             y = y + MyImage[(i+1)+(j-1)*ih] + MyImage[(i+1)+j*ih] + MyImage[(i+1)+(j+1)*ih];
-            MyImage[i+j*ih] = sqrt(x*x + y*y);
-            //odata[iw*i+j] = sqrt(x*x + y*y);
+            s = sqrt(x*x + y*y);
+            if (s > 255) {
+                MyImage[i+j*ih] = 255;
+            }
+            else {
+                MyImage[i+j*ih] = s;
+            }
         }
     }
     /*
