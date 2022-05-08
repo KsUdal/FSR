@@ -41,7 +41,7 @@ int main() {
         }
     }
     */
-
+    for (k = 0; k < 10; k++) {
     //Roberts
     unsigned char x, y;
     for (i = 2; i < ih; i++) {
@@ -50,6 +50,7 @@ int main() {
             y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
             MyImage[iw*i+j] = sqrt(x*x + y*y);
         }
+    }
     }
 
     //coloring
