@@ -50,12 +50,14 @@ int main() {
     int xi, yi;
     for (i = 1; i < ih-1; i++) {
         for (j = 1; j < iw-1; j++) {
-            xi = pixels[i-1][j-1] + 2*pixels[i-1][j] + pixels[i-1][j+1];
-            xi = xi - pixels[i+1][j-1] - 2*pixels[i+1][j] - pixels[i+1][j+1];
-            yi = pixels[i-1][j-1] + 2*pixels[i][j-1] + pixels[i+1][j-1];
-            yi = yi - pixels[i-1][j+1] - 2*pixels[i][j+1] - pixels[i+1][j+1];
-            angle = yi; angle = angle/xi;
-            t = sqrt(xi*xi + yi*yi)*sin(angle)/cos(angle);
+            //xi = pixels[i-1][j-1] + 2*pixels[i-1][j] + pixels[i-1][j+1];
+            //xi = xi - pixels[i+1][j-1] - 2*pixels[i+1][j] - pixels[i+1][j+1];
+            //yi = pixels[i-1][j-1] + 2*pixels[i][j-1] + pixels[i+1][j-1];
+            //yi = yi - pixels[i-1][j+1] - 2*pixels[i][j+1] - pixels[i+1][j+1];
+            //angle = yi; angle = angle/xi;
+            //t = sqrt(xi*xi + yi*yi)*sin(angle)/cos(angle);
+            t = pixels[i-1][j-1]+pixels[i-1][j]-pixels[i-1][j+1]-pixels[i][j+1]+pixels[i+1][j+1]+pixels[i+1][j];
+            t = t-pixels[i+1][j-1]-pixels[i][j-1];
             pixels[i][j] = fabs(t);
             //MyImage[i*ih+j] = pixels[i][j];
         }
