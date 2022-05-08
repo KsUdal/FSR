@@ -42,7 +42,7 @@ int main() {
             y = -MyImage[iw*(i-1)+(j-1)] - MyImage[(i-1)*iw+j] - MyImage[iw*(i-1)+(j+1)];
             y = y + MyImage[iw*(i+1)+(j-1)] + MyImage[(i+1)*iw+j] + MyImage[iw*(i+1)+(j+1)];
             s = sqrt(x*x + y*y);
-            MyImage[iw*i+j] = MyImage[iw*i + j] - s;
+            MyImage[iw*i+j] = MyImage[iw*i + j] - s*s;
         }
     }
     /*
