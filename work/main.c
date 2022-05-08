@@ -4,7 +4,7 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-#define STB_INAGE_WRITH_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
 // Макроподстановка, меняющая p(i, j) на  idata[(i)+(j)*iw]
@@ -24,6 +24,13 @@ int main() {
         return 1;
     }
 
+    int i, k;
+    k = 0;
+    unsigned char* MyImage = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
+    for (i = 0; i < ih*iw*n; i = i + n) {
+        MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
+        k = k + 1;
+    }
     /*
     //Демонстрационные опыты для семинара
     char * pixel = idata;
@@ -54,13 +61,13 @@ int main() {
             }
         }
     }
-
-    char* outputPath = "~/work/output.png";
-    // записываем картинку
-    stbi_write_png(outputPath, ow, oh, n, odata, 0);
     */
-
-    printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
+    char* outputPath = "output.png";
+    // записываем картинку
+    int one = 1; int zero = 0;
+    stbi_write_png(outputPath, iw, ih, one, MyImage, zero);
+    //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
+    //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
     //stbi_image_free(idata);
     return 0;
