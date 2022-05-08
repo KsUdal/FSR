@@ -37,19 +37,19 @@ int main() {
     //фильтр Собеля
     int j;
     unsigned char x, y;
-    for (i = 1; i < ih - 1; i++) {
-        for (j = 1; j < iw - 1; j++) {
-            x = -MyImage[iw*(i-1)+(j-1)] - 2*MyImage[iw*i+(j-1)] - MyImage[iw*(i+1)+(j-1)];
-            x = x + MyImage[iw*(i-1)+(j+1)] + 2*MyImage[iw*i+(j+1)] + MyImage[iw*(i+1)+(j+1)];
-            y = -MyImage[iw*(i-1)+(j-1)] - 2*MyImage[iw*(i-1)+j] - MyImage[iw*(i-1)+(j+1)];
-            y = y + MyImage[iw*(i+1)+(j-1)] + 2*MyImage[iw*(i+1)+j] + MyImage[iw*(i+1)+(j+1)];
-            MyImage[iw*i+j] = sqrt(x*x + y*y);
+    for (i = iw+1; i < ih*iw-iw-1; i++) {
+        //for (j = 1; j < iw - 1; j++) {
+            x = -MyImage[i-iw-1] - 2*MyImage[i-iw] - MyImage[i-iw+1];
+            x = x + MyImage[i+iw-1] + 2*MyImage[i+iw] + MyImage[i+iw+1];
+            y = -MyImage[i-iw-1] - 2*MyImage[i-1] - MyImage[i+iw-1];
+            y = y + MyImage[i-iw+1] + 2*MyImage[i+1] + MyImage[i+iw+1];
+            MyImage[i] = sqrt(x*x + y*y);
             //if (MyImage[i*j] < 64) MyImage[i*j] = 64;
             //if (MyImage[i*j] > 192) MyImage[i*j] = 192;
             //if ((MyImage[i*j] < 128) && (MyImage[i*j] > 64)) MyImage[i*j] = MyImage[i*j] - 64;
             //if ((MyImage[i*j] < 192) && (MyImage[i*j] > 128)) MyImage[i*j] = MyImage[i*j] + 64;
             //odata[iw*i+j] = sqrt(x*x + y*y);
-        }
+        //}
     }
 
     //Sobel Filter second part
