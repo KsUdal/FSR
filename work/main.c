@@ -33,14 +33,6 @@ int main() {
         k = k + 1;
     }
 
-    //coloring
-    for (i = 0; i < ih; i++) {
-        for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
-        }
-    }
-
     //Sobel
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
@@ -53,6 +45,15 @@ int main() {
             MyImage[iw*i+j] = MyImage[iw*i + j] - s;
         }
     }
+    /*
+    //coloring
+    for (i = 0; i < ih; i++) {
+        for (j = 0; j < iw; j++) {
+            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
+        }
+    }
+    */
 
     char* outputPath = "output.png";
     // записываем картинку
