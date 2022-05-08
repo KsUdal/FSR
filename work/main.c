@@ -64,8 +64,8 @@ int main() {
     //Sobel Filter second part
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 16) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 16) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 200) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 200) MyImage[iw*i+j] = 255;
         }
     }
 
