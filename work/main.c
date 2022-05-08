@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <strings.h>
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -31,6 +32,22 @@ int main() {
         MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
+    //unsigned char* odata = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
+
+    //фильтр Собеля
+    int j;
+    unsigned char x, y;
+    for (i = 1; i < iw - 1; i++) {
+        for (j = 1; j < ih - 1; j++) {
+            x = -MyImage[(i-1)+(j-1)] - 2*MyImage[i+(j-1)] - MyImage[(i+1)+(j-1)];
+            x = x + MyImage[(i-1)+(j+1)] + 2*MyImage[i+(j+1)] + MyImage[(i+1)+(j+1)];
+            y = -MyImage[(i-1)+(j-1)] - 2*MyImage[(i-1)+j] - MyImage[(i-1)+(j+1)];
+            y = y + MyImage[(i+1)+(j-1)] + 2*MyImage[(i+1)+j] + MyImage[(i+1)+(j+1)];
+            MyImage[i+j] = sqrt(x*x + y*y);
+            //odata[iw*i+j] = sqrt(x*x + y*y);
+        }
+    }
+
     /*
     //Демонстрационные опыты для семинара
     char * pixel = idata;
@@ -69,6 +86,6 @@ int main() {
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
-    //stbi_image_free(idata);
+    stbi_image_free(MyImage);
     return 0;
 }
