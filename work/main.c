@@ -44,6 +44,8 @@ int main() {
             y = -MyImage[(i-1)*(j-1)] - 2*MyImage[(i-1)*j] - MyImage[(i-1)*(j+1)];
             y = y + MyImage[(i+1)*(j-1)] + 2*MyImage[(i+1)*j] + MyImage[(i+1)*(j+1)];
             MyImage[i*j] = sqrt(x*x + y*y);
+            if ((MyImage[i*j] < 128) && (MyImage[i*j] > 64)) MyImage[i*j] = MyImage[i*j] - 64;
+            if ((MyImage[i*j] < 192) && (MyImage[i*j] > 128)) MyImage[i*j] = MyImage[i*j] + 64;
             //odata[iw*i+j] = sqrt(x*x + y*y);
         }
     }
