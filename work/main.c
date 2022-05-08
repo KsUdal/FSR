@@ -41,6 +41,24 @@ int main() {
         }
     }
 
+    int pixels[ih][iw];
+    for (i = 0; i < ih*iw; i++) {
+        k = i/iw;
+        pixels[k][i-iw*k] = MyImage[i];
+    }
+    int xi, yi;
+    for (i = 1; i < ih-1; i++) {
+        for (j = 1; j < iw-1; j++) {
+            xi = pixels[i-1][j-1] + 2*pixels[i-1][j] + pixels[i-1][j+1];
+            xi = xi - pixels[i+1][j-1] - 2*pixels[i+1][j] - pixels[i+1][j+1];
+            yi = pixels[i-1][j-1] + 2*pixels[i][j-1] + pixels[i+1][j-1];
+            yi = yi - pixels[i-1][j+1] - 2*pixels[i][j+1] - pixels[i+1][j+1];
+            pixels[i][j] = fabs(xi) + fabs(yi);
+            MyImage[i*ih+j] = pixels[i][j];
+        }
+    }
+
+    /*
     //Sobel
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
@@ -58,16 +76,7 @@ int main() {
             }
         }
     }
-    /*
-    //coloring
-    for (i = 0; i < ih; i++) {
-        for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
-        }
-    }
     */
-
 
     char* outputPath = "output.png";
     // записываем картинку
