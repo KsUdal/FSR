@@ -36,8 +36,8 @@ int main() {
 
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (MyImage[iw*i+j] < 60) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 190) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 160) MyImage[iw*i+j] = 255;
         }
     }
 
@@ -57,8 +57,8 @@ int main() {
     //coloring
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (odata[iw*i+j] < 112) odata[iw*i+j] = 0;
-            if (odata[iw*i+j] > 156) odata[iw*i+j] = 255;
+            if (odata[iw*i+j] < 60) odata[iw*i+j] = 0;
+            if (odata[iw*i+j] > 190) odata[iw*i+j] = 255;
         }
     }
 
