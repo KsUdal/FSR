@@ -33,63 +33,15 @@ int main() {
         k = k + 1;
     }
 
-    /*
-    int pixels[ih][iw]
-    for (i = 0; i < ih*iw; i++) {
-        k = i/iw;
-        pixels[k][i-iw*k] = MyImage[i];
-    }
-
-    int j;
-    for (i = 0; i < ih; i++) {
-        for
-    }
-    */
-    /*
-    //Sobel Filter second part
+    //coloring
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 128) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 128) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
         }
     }
-    */
-    /*
-    for (i = 2; i < iw - 1; i++) {
-        for (j = 2; j < ih - 1; j++) {
-            x = -MyImage[(i-1)*(j-1)] - 2*MyImage[i*(j-1)] - MyImage[(i+1)*(j-1)];
-            x = x + MyImage[(i-1)*(j+1)] + 2*MyImage[i*(j+1)] + MyImage[(i+1)*(j+1)];
-            y = -MyImage[(i-1)*(j-1)] - 2*MyImage[(i-1)*j] - MyImage[(i-1)*(j+1)];
-            y = y + MyImage[(i+1)*(j-1)] + 2*MyImage[(i+1)*j] + MyImage[(i+1)*(j+1)];
-            MyImage[i*j] = sqrt(x*x + y*y);
-            //odata[iw*i+j] = sqrt(x*x + y*y);
-        }
-    }
-    */
-    /*
-    //фильтр Собеля
-    unsigned char x, y;
-    for (i = iw+1; i < ih*iw-iw-1; i++) {
-        //for (j = 1; j < iw - 1; j++) {
-            x = -MyImage[i-iw-1] - 2*MyImage[i-iw] - MyImage[i-iw+1];
-            x = x + MyImage[i+iw-1] + 2*MyImage[i+iw] + MyImage[i+iw+1];
-            y = -MyImage[i-iw-1] - 2*MyImage[i-1] - MyImage[i+iw-1];
-            y = y + MyImage[i-iw+1] + 2*MyImage[i+1] + MyImage[i+iw+1];
-            MyImage[i] = sqrt(x*x + y*y);
-        //}
-    }
-    */
 
-    /*
-    //Sobel Filter second part
-    for (i = 0; i < ih; i++) {
-        for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 128) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 128) MyImage[iw*i+j] = 255;
-        }
-    }
-    */
-
+    //Sobel
     unsigned char x, y;
     for (i = 2; i < iw - 1; i++) {
         for (j = 2; j < ih - 1; j++) {
@@ -101,14 +53,15 @@ int main() {
             //odata[iw*i+j] = sqrt(x*x + y*y);
         }
     }
-
-    //Sobel Filter second part
+    /*
+    //coloring
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 128) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 128) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
         }
     }
+    */
 
 
     char* outputPath = "output.png";
