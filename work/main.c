@@ -42,21 +42,13 @@ int main() {
     }
     */
 
-    //Sobel
+    //Roberts
     unsigned char x, y;
     for (i = 2; i < ih; i++) {
         for (j = 2; j < iw; j++) {
             x = MyImage[iw*i+j] - MyImage[iw*(i-1)+j];
             y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
-            MyImage[i*j] = sqrt(x*x + y*y);
-        }
-    }
-
-    for (i = 2; i < ih; i++) {
-        for (j = 2; j < iw; j++) {
-            x = MyImage[iw*i+(j-1)] + MyImage[iw*(i-1)+j] + MyImage[iw*(i+1)+j] + MyImage[iw*i+(j+1)];
-            //y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
-            MyImage[iw*i+j] = x;
+            MyImage[iw*i+j] = sqrt(x*x + y*y);
         }
     }
 
