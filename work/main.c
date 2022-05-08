@@ -48,8 +48,8 @@ int main() {
     }
 
     //coloring
-    for (i = 0; i < ih; i++) {
-        for (j = 0; j < iw; j++) {
+    for (i = 2; i < ih-1; i++) {
+        for (j = 2; j < iw-1; j++) {
             if (odata[iw*i+j] < 112) odata[iw*i+j] = 0;
             if (odata[iw*i+j] > 156) odata[iw*i+j] = 255;
         }
