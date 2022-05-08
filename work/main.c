@@ -28,6 +28,7 @@ int main() {
     int i, k, j;
     k = 0;
     unsigned char* MyImage = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
+    unsigned char* odata = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < ih*iw*n; i = i + n) {
         MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
@@ -42,7 +43,7 @@ int main() {
             y = -MyImage[iw*(i-1)+(j-1)] - 2*MyImage[iw*(i-1)+j] - MyImage[iw*(i-1)+(j+1)];
             y = y + MyImage[iw*(i+1)+(j-1)] + 2*MyImage[iw*(i+1)+j] + MyImage[iw*(i+1)+(j+1)];
             s = sqrt(x*x + y*y);
-            MyImage[iw*i+j] = 4*MyImage[iw*i + j] - s;
+            odata[iw*i+j] = s;
         }
     }
     /*
@@ -58,10 +59,11 @@ int main() {
     char* outputPath = "output.png";
     // записываем картинку
     int one = 1; int zero = 0;
-    stbi_write_png(outputPath, iw, ih, one, MyImage, zero);
+    stbi_write_png(outputPath, iw, ih, one, odata, zero);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
     stbi_image_free(MyImage);
+    stbi_image_free(odata);
     return 0;
 }
