@@ -37,12 +37,12 @@ int main() {
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
         for (j = 2; j < iw - 1; j++) {
-            x = -MyImage[iw*(i-1)+(j-1)] - MyImage[iw*i+(j-1)] - MyImage[iw*(i+1)+(j-1)];
-            x = x - MyImage[iw*(i-1)+(j+1)] - MyImage[iw*i+(j+1)] - MyImage[iw*(i+1)+(j+1)];
-            y = -MyImage[iw*(i-1)+j];
-            y = y - MyImage[iw*(i+1)+j];
-            s = x + y;
-            MyImage[iw*i+j] = 8*MyImage[iw*i + j] + s;
+            x = -MyImage[iw*(i-1)+(j-1)] - 2*MyImage[iw*i+(j-1)] - MyImage[iw*(i+1)+(j-1)];
+            x = x + MyImage[iw*(i-1)+(j+1)] + 2*MyImage[iw*i+(j+1)] + MyImage[iw*(i+1)+(j+1)];
+            y = -MyImage[iw*(i-1)+(j-1)] - 2*MyImage[iw*(i-1)+j] - MyImage[iw*(i-1)+(j+1)];
+            y = y + MyImage[iw*(i+1)+(j-1)] + 2*MyImage[iw*(i+1)+j] + MyImage[iw*(i+1)+(j+1)];
+            s = sqrt(x*x + y*y);
+            MyImage[iw*i+j] = 4*MyImage[iw*i + j] - s;
         }
     }
     /*
