@@ -48,15 +48,23 @@ int main() {
         for (j = 2; j < iw; j++) {
             x = MyImage[iw*i+j] - MyImage[iw*(i-1)+j];
             y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
-            MyImage[i*j] = sqrt(x*x + y*y);
+            MyImage[iw*i+j] = sqrt(x*x + y*y);
+        }
+    }
+
+    for (i = 2; i < ih; i++) {
+        for (j = 2; j < iw; j++) {
+            x = MyImage[iw*i+(j-1)] + MyImage[iw*(i-1)+j] + MyImage[iw*(i+1)+j] + MyImage[iw*i+(j+1)];
+            //y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
+            MyImage[iw*i+j] = x;
         }
     }
 
     //coloring
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 160) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 190) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
         }
     }
 
