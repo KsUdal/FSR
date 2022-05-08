@@ -34,6 +34,13 @@ int main() {
         k = k + 1;
     }
 
+    for (i = 2; i < ih-1; i++) {
+        for (j = 2; j < iw-1; j++) {
+            if (MyImage[iw*i+j] < 60) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 190) MyImage[iw*i+j] = 255;
+        }
+    }
+
     //Roberts
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
