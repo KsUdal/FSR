@@ -48,7 +48,7 @@ int main() {
         for (j = 2; j < iw; j++) {
             x = MyImage[iw*i+j] - MyImage[iw*(i-1)+j];
             y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
-            MyImage[iw*i+j] = sqrt(x*x + y*y);
+            MyImage[i*j] = sqrt(x*x + y*y);
         }
     }
 
