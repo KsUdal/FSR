@@ -50,7 +50,7 @@ int main() {
             y = -MyImage[(i-1)+(j-1)*ih] - MyImage[(i-1)+j*ih] - MyImage[(i-1)+(j+1)*ih];
             y = y + MyImage[(i+1)+(j-1)*ih] + MyImage[(i+1)+j*ih] + MyImage[(i+1)+(j+1)*ih];
             s = sqrt(x*x + y*y);
-            MyImage[i+j*ih] = MyImage[i + j*ih] - s;
+            MyImage[i+j*ih] = MyImage[i + j*ih] + s;
         }
     }
 
