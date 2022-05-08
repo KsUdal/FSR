@@ -41,16 +41,15 @@ int main() {
         }
     }
     */
-    for (k = 0; k < 10; k++) {
+
     //Roberts
     unsigned char x, y;
     for (i = 2; i < ih; i++) {
         for (j = 2; j < iw; j++) {
             x = MyImage[iw*i+j] - MyImage[iw*(i-1)+j];
             y = MyImage[iw*i+j] - MyImage[iw*i+(j-1)];
-            MyImage[iw*i+j] = sqrt(x*x + y*y);
+            MyImage[i*iw] = sqrt(x*x + y*y);
         }
-    }
     }
 
     //coloring
