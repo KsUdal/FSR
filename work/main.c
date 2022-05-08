@@ -33,15 +33,13 @@ int main() {
         k = k + 1;
     }
 
-    /*
     //coloring
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
-            if (MyImage[iw*i+j] < 112) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 175) MyImage[iw*i+j] = 255;
         }
     }
-    */
 
     int pixels[ih][iw];
     for (i = 0; i < ih*iw; i++) {
@@ -55,9 +53,14 @@ int main() {
             xi = xi - pixels[i+1][j-1] - 2*pixels[i+1][j] - pixels[i+1][j+1];
             yi = pixels[i-1][j-1] + 2*pixels[i][j-1] + pixels[i+1][j-1];
             yi = yi - pixels[i-1][j+1] - 2*pixels[i][j+1] - pixels[i+1][j+1];
-            pixels[i][j] = xi + yi;
-            MyImage[i*ih+j] = pixels[i][j];
+            pixels[i][j] = fabs(xi + yi);
+            //MyImage[i*ih+j] = pixels[i][j];
         }
+    }
+
+    for (i = 0; i < ih*iw; i++) {
+        k = i/iw;
+        MyImage[i] = pixels[k][i-iw*k];
     }
 
     /*
