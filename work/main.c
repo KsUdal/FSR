@@ -32,7 +32,7 @@ int main() {
         MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
-
+    /*
     //coloring
     for (i = 0; i < ih; i++) {
         for (j = 0; j < iw; j++) {
@@ -40,6 +40,7 @@ int main() {
             if (MyImage[iw*i+j] > 156) MyImage[iw*i+j] = 255;
         }
     }
+    */
 
     //Sobel
     unsigned char x, y;
