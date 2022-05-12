@@ -47,11 +47,11 @@ int main() {
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
         for (j = 2; j < iw - 1; j++) {
-/*
+
             //Roberts
             x = MyImage[iw*(i-1)+(j-1)] - MyImage[iw*i+j];
             y = MyImage[iw*(i-1)+j] - MyImage[iw*i+(j+1)];
-*/
+
 /*
             //Sobel apgrade
             x = 3*MyImage[iw*(i-1)+(j-1)] + 10*MyImage[iw*i+(j-1)] + 3*MyImage[iw*(i+1)+(j-1)];
@@ -59,13 +59,13 @@ int main() {
             y = 3*MyImage[iw*(i-1)+(j-1)] + 10*MyImage[iw*(i-1)+j] + 3*MyImage[iw*(i-1)+(j+1)];
             y = y - 3*MyImage[iw*(i+1)+(j-1)] - 10*MyImage[iw*(i+1)+j] - 3*MyImage[iw*(i+1)+(j+1)];
 */
-
+/*
             //casual Sobel
             x = MyImage[iw*(i-1)+(j-1)] + 2*MyImage[iw*i+(j-1)] + MyImage[iw*(i+1)+(j-1)];
             x = x - MyImage[iw*(i-1)+(j+1)] - 2*MyImage[iw*i+(j+1)] - MyImage[iw*(i+1)+(j+1)];
             y = MyImage[iw*(i-1)+(j-1)] + 2*MyImage[iw*(i-1)+j] + MyImage[iw*(i-1)+(j+1)];
             y = y - MyImage[iw*(i+1)+(j-1)] - 2*MyImage[iw*(i+1)+j] - MyImage[iw*(i+1)+(j+1)];
-
+*/
 /*
             //just an experiment
             x = 0.5*MyImage[iw*(i-1)+(j-1)] + MyImage[iw*i+(j-1)] + 0.5*MyImage[iw*(i+1)+(j-1)];
