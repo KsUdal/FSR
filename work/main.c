@@ -15,8 +15,9 @@
 int main() {
 
     // строка, путь к файлу
-    char*inputPath = "hampster.png";
+    //char*inputPath = "hampster.png";
     //char*inputPath = "tooth.png";
+    char*inputPath = "arm_break.png";
     int iw, ih, n; //ширина, высота и количество цветовых каналов
 
     // Загружаем изображение, чтобы получить информацию о ширине, высоте и цветовом канале
@@ -86,7 +87,8 @@ int main() {
         }
     }
 
-    char* outputPath = "output_hamster.png";
+    char* outputPath = "output_arm_break.png";
+    //char* outputPath = "output_hamster.png";
     //char* outputPath = "output_tooth.png";
     // записываем картинку
     int one = 1; int zero = 0;
