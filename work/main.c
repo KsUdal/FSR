@@ -15,8 +15,8 @@
 int main() {
 
     // строка, путь к файлу
-    //char*inputPath = "hampster.png";
-    char*inputPath = "tooth.png";
+    char*inputPath = "hampster.png";
+    //char*inputPath = "tooth.png";
     int iw, ih, n; //ширина, высота и количество цветовых каналов
 
     // Загружаем изображение, чтобы получить информацию о ширине, высоте и цветовом канале
@@ -86,7 +86,8 @@ int main() {
         }
     }
 
-    char* outputPath = "output_tooth.png";
+    char* outputPath = "output_hamster.png";
+    //char* outputPath = "output_tooth.png";
     // записываем картинку
     int one = 1; int zero = 0;
     stbi_write_png(outputPath, iw, ih, one, odata, zero);
