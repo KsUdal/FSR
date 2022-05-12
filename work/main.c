@@ -34,6 +34,7 @@ int main() {
         k = k + 1;
     }
 
+    //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
             if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
@@ -41,28 +42,33 @@ int main() {
         }
     }
 
-    //Roberts
+    //Filter operators
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
         for (j = 2; j < iw - 1; j++) {
-            x = MyImage[iw*(i-1)+(j-1)] - MyImage[iw*i+j];
-            //x = x + MyImage[iw*(i-1)+(j+1)] + MyImage[iw*i+(j+1)] + MyImage[iw*(i+1)+(j+1)];
-            y = MyImage[iw*(i-1)+j] - MyImage[iw*i+(j+1)];
-            //y = y + MyImage[iw*(i+1)+(j-1)] + MyImage[iw*(i+1)+j] + MyImage[iw*(i+1)+(j+1)];
+            //Roberts
+            //x = MyImage[iw*(i-1)+(j-1)] - MyImage[iw*i+j];
+            //y = MyImage[iw*(i-1)+j] - MyImage[iw*i+(j+1)];
+
+            //Sobel apgrade
+            x = 3*MyImage[iw*(i-1)+(j-1)] + 10*MyImage[iw*i+(j-1)] + 3*MyImage[iw*(i+1)+(j-1)];
+            x = x - 3*MyImage[iw*(i-1)+(j+1)] - 10*MyImage[iw*i+(j+1)] - 3*MyImage[iw*(i+1)+(j+1)];
+            y = 3*MyImage[iw*(i-1)+(j-1)] + 10*MyImage[iw*(i-1)+j] + 3*MyImage[iw*(i-1)+(j+1)];
+            y = y - 3*MyImage[iw*(i+1)+(j-1)] - 10*MyImage[iw*(i+1)+j] - 3*MyImage[iw*(i+1)+(j+1)];
             s = sqrt(x*x + y*y);
             odata[iw*i+j] = s;
         }
     }
 
-    //coloring
+    //coloring to improve contrast
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (odata[iw*i+j] < 60) odata[iw*i+j] = 0;
-            if (odata[iw*i+j] > 190) odata[iw*i+j] = 255;
+            if (odata[iw*i+j] < 40) odata[iw*i+j] = 0;
+            if (odata[iw*i+j] > 210) odata[iw*i+j] = 255;
         }
     }
 
-    char* outputPath = "output.png";
+    char* outputPath = "output_hamster.png";
     // записываем картинку
     int one = 1; int zero = 0;
     stbi_write_png(outputPath, iw, ih, one, odata, zero);
