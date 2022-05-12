@@ -15,7 +15,8 @@
 int main() {
 
     // строка, путь к файлу
-    char*inputPath = "hampster.png";
+    //char*inputPath = "hampster.png";
+    char*inputPath = "tooth.png";
     int iw, ih, n; //ширина, высота и количество цветовых каналов
 
     // Загружаем изображение, чтобы получить информацию о ширине, высоте и цветовом канале
@@ -65,12 +66,13 @@ int main() {
             y = MyImage[iw*(i-1)+(j-1)] + 2*MyImage[iw*(i-1)+j] + MyImage[iw*(i-1)+(j+1)];
             y = y - MyImage[iw*(i+1)+(j-1)] - 2*MyImage[iw*(i+1)+j] - MyImage[iw*(i+1)+(j+1)];
 */
+/*
             //just an experiment
             x = 0.5*MyImage[iw*(i-1)+(j-1)] + MyImage[iw*i+(j-1)] + 0.5*MyImage[iw*(i+1)+(j-1)];
             x = x - 0.5*MyImage[iw*(i-1)+(j+1)] - MyImage[iw*i+(j+1)] - 0.5*MyImage[iw*(i+1)+(j+1)];
             y = 0.5*MyImage[iw*(i-1)+(j-1)] + MyImage[iw*(i-1)+j] + 0.5*MyImage[iw*(i-1)+(j+1)];
             y = y - 0.5*MyImage[iw*(i+1)+(j-1)] - MyImage[iw*(i+1)+j] - 0.5*MyImage[iw*(i+1)+(j+1)];
-
+*/
             s = sqrt(x*x + y*y);
             odata[iw*i+j] = s;
         }
@@ -79,12 +81,12 @@ int main() {
     //coloring to improve contrast
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (odata[iw*i+j] < 40) odata[iw*i+j] = 0;
+            if (odata[iw*i+j] < 190) odata[iw*i+j] = 0;
             if (odata[iw*i+j] > 210) odata[iw*i+j] = 255;
         }
     }
 
-    char* outputPath = "output_hamster.png";
+    char* outputPath = "output_tooth.png";
     // записываем картинку
     int one = 1; int zero = 0;
     stbi_write_png(outputPath, iw, ih, one, odata, zero);
