@@ -49,12 +49,19 @@ int main() {
             //Roberts
             //x = MyImage[iw*(i-1)+(j-1)] - MyImage[iw*i+j];
             //y = MyImage[iw*(i-1)+j] - MyImage[iw*i+(j+1)];
-
+            /*
             //Sobel apgrade
             x = 3*MyImage[iw*(i-1)+(j-1)] + 10*MyImage[iw*i+(j-1)] + 3*MyImage[iw*(i+1)+(j-1)];
             x = x - 3*MyImage[iw*(i-1)+(j+1)] - 10*MyImage[iw*i+(j+1)] - 3*MyImage[iw*(i+1)+(j+1)];
             y = 3*MyImage[iw*(i-1)+(j-1)] + 10*MyImage[iw*(i-1)+j] + 3*MyImage[iw*(i-1)+(j+1)];
             y = y - 3*MyImage[iw*(i+1)+(j-1)] - 10*MyImage[iw*(i+1)+j] - 3*MyImage[iw*(i+1)+(j+1)];
+            */
+            //casual Sobel
+            x = MyImage[iw*(i-1)+(j-1)] + 2*MyImage[iw*i+(j-1)] + MyImage[iw*(i+1)+(j-1)];
+            x = x - MyImage[iw*(i-1)+(j+1)] - 2*MyImage[iw*i+(j+1)] - MyImage[iw*(i+1)+(j+1)];
+            y = MyImage[iw*(i-1)+(j-1)] + 2*MyImage[iw*(i-1)+j] + MyImage[iw*(i-1)+(j+1)];
+            y = y - MyImage[iw*(i+1)+(j-1)] - 2*MyImage[iw*(i+1)+j] - MyImage[iw*(i+1)+(j+1)];
+
             s = sqrt(x*x + y*y);
             odata[iw*i+j] = s;
         }
