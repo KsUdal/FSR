@@ -8,13 +8,25 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-void dfs(int v, int color, int N, int* col, int**mat) {
-    int i, j;
+void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
+    printf("In dfs with v = %d\n", v);
+    int i, j, u, d, r, l;
     col[v] = color;
-    for (i = 0; i < N; i++) {
-        if ((mat[i][v] == 1) && (col[i] == 0)) {
-            dfs(i, color, N, col, mat);
-        }
+    if (v+1 < iw*ih) {
+        r = mat[v+1];
+        if ((col[v+1] == 0) && (abs(mat[v] - r) < 30)) dfs(v+1, color, iw, ih, col, mat);
+    }
+    if (v-1 > 0) {
+        l = mat[v-1];
+        if ((col[v-1] == 0) && (abs(mat[v] - l) < 30)) dfs(v-1, color, iw, ih, col, mat);
+    }
+    if (v-iw > 0) {
+        u = mat[v-iw];
+        if ((col[v-iw] == 0) && (abs(mat[v] - u) < 30)) dfs(v-iw, color, iw, ih, col, mat);
+    }
+    if (v+iw < ih*iw) {
+        d = mat[v+iw];
+        if ((col[v+iw] == 0) && (abs(mat[v] - d) < 30)) dfs(v+iw, color, iw, ih, col, mat);
     }
 }
 
@@ -61,7 +73,7 @@ int main() {
             newIm[iw*i+j] = newIm[iw*i+j] + 0.09*MyImage[iw*(i-1)+(j+1)] + 0.09*MyImage[iw*(i-1)+(j-1)];
         }
     }
-
+/*
     //don't want it right now
     //contrast again
     for (i = 0; i < ih*iw; i++) {
@@ -80,44 +92,30 @@ int main() {
         if (newIm[i] > 150) odata[i*(n-2)] = 220;
         if ((newIm[i] <= 150) && (newIm[i] >= 50)) odata[i*(n-1)] = 230;
     }
-/*
+*/
     //graph making
-    //int mat[ih*iw][ih*iw];
-    int** mat = (int**)malloc(iw*ih*sizeof(int*));
-    for (i = 0; i < iw*ih; i++) {
-        mat[i] = (int*)malloc(iw*ih*sizeof(int));
-    }
-
-    for (i = 1; i < ih*iw; i++) {
-        for (j = 1; j < iw*ih; j++) {
-            mat[i][j] = 0;
-            if (abs(newIm[i] - newIm[j]) < 30) {
-                mat[i][j] = 1;
-                mat[j][i] = 1;
-            }
-        }
-    }
+    //int used[ih*iw];
 
     int col[iw*ih];
     for (i = 0; i < iw*ih; i++) col[i] = 0;
     k = 1;
     printf("problem in dfs\n");
     //dfs making
-    for (i = 0; i < iw*ih; i++) {
+    for (i = iw+2; i < (iw-1)*(ih-1); i++) {
         if (col[i] == 0) {
-            dfs(i, k, iw*ih, col, mat);
+            //dfs(i, k, iw, ih, col, newIm);
             k = k + 1;
         }
     }
-
-    k = 0;
-    for (i = 0; i < ih*iw; i++) {
-        for (j = k; j < k+n; j++) {
-            idata[j] = col[i]*30;
-        }
-        k = k + n;
+    printf("Problem with coloring\n");
+    //now have to color the colors from col
+    for (i = 0; i < iw*ih; i++) {
+        odata[i*n] = 50*col[i];
+        odata[i*n+1] = 40*col[i];
+        odata[i*n+2] = 30*col[i];
+        if (n == 4) odata[i*n+3] = 60*col[i];
     }
-*/
+    printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
     //going back to n channels
 
     //char* outputPath = "output_arrow_head.png";
