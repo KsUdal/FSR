@@ -9,13 +9,14 @@
 #include "stb_image_write.h"
 
 void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
-    printf("In dfs with v = %d\n", v);
+    //printf("In dfs with v = %d\n", v);
     int i, j, u, d, r, l;
     col[v] = color;
     if (v+1 < iw*ih) {
         r = mat[v+1];
         if ((col[v+1] == 0) && (abs(mat[v] - r) < 30)) dfs(v+1, color, iw, ih, col, mat);
     }
+    /*
     if (v-1 > 0) {
         l = mat[v-1];
         if ((col[v-1] == 0) && (abs(mat[v] - l) < 30)) dfs(v-1, color, iw, ih, col, mat);
@@ -24,6 +25,7 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
         u = mat[v-iw];
         if ((col[v-iw] == 0) && (abs(mat[v] - u) < 30)) dfs(v-iw, color, iw, ih, col, mat);
     }
+    */
     if (v+iw < ih*iw) {
         d = mat[v+iw];
         if ((col[v+iw] == 0) && (abs(mat[v] - d) < 30)) dfs(v+iw, color, iw, ih, col, mat);
@@ -101,9 +103,9 @@ int main() {
     k = 1;
     printf("problem in dfs\n");
     //dfs making
-    for (i = iw+2; i < (iw-1)*(ih-1); i++) {
+    for (i = 0; i < (iw-1)*(ih-1); i++) {
         if (col[i] == 0) {
-            //dfs(i, k, iw, ih, col, newIm);
+            dfs(i, k, iw, ih, col, newIm);
             k = k + 1;
         }
     }
@@ -115,7 +117,7 @@ int main() {
         odata[i*n+2] = 30*col[i];
         if (n == 4) odata[i*n+3] = 60*col[i];
     }
-    printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
+    //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
     //going back to n channels
 
     //char* outputPath = "output_arrow_head.png";
@@ -126,7 +128,7 @@ int main() {
 
     // записываем картинку
     int one = 1; int zero = 0;
-    stbi_write_png(outputPath, iw, ih, n, odata, 1);
+    stbi_write_png(outputPath, iw, ih, n, odata, 0);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
