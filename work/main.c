@@ -77,7 +77,7 @@ int main() {
             newIm[iw*i+j] = newIm[iw*i+j] + 0.09*MyImage[iw*(i-1)+(j+1)] + 0.09*MyImage[iw*(i-1)+(j-1)];
         }
     }
-
+/*
     //don't want it right now
     //contrast again
     for (i = 0; i < ih*iw; i++) {
@@ -85,6 +85,7 @@ int main() {
         if (newIm[i] > 165) newIm[i] = 255;
         if ((newIm[i] != 0) && (newIm[i] != 255)) newIm[i] = 100;
     }
+*/
 /*
     for (i = 0; i < ih*iw; i++) {
         if (newIm[i] < 50) {
@@ -114,8 +115,8 @@ int main() {
     printf("Problem with coloring\n");
     //now have to color the colors from col
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = (col[i])%256;
-        odata[i*n+1] = (col[i])%256;
+        odata[i*n] = (2*col[i])%256;
+        odata[i*n+1] = (46+col[i])%256;
         odata[i*n+2] = (col[i])%256;
         if (n == 4) odata[i*n+3] = 255;
     }
