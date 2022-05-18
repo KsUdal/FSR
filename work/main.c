@@ -57,15 +57,26 @@ int main() {
     unsigned char* odata = (unsigned char*)malloc(ih*iw*n*sizeof(unsigned char));
     unsigned char* newIm = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < ih*iw*n; i = i + n) {
-        MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
+        newIm[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
 
     //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 160) MyImage[iw*i+j] = 255;
+            if (newIm[iw*i+j] < 100) newIm[iw*i+j] = 0;
+            if (newIm[iw*i+j] > 160) newIm[iw*i+j] = 255;
+        }
+    }
+
+    unsigned char x, y, s;
+    for (i = 2; i < ih - 1; i++) {
+        for (j = 2; j < iw - 1; j++) {
+            //Roberts
+            x = newIm[iw*(i-1)+(j-1)] - newIm[iw*i+j];
+            y = newIm[iw*(i-1)+j] - newIm[iw*i+(j+1)];
+            s = sqrt(x*x + y*y);
+            MyImage[iw*i+j] = s;
         }
     }
 
@@ -79,14 +90,6 @@ int main() {
         }
     }
 /*
-    //don't want it right now
-    //contrast again
-    for (i = 0; i < ih*iw; i++) {
-        if (newIm[i] < 20) newIm[i] = 0;
-        if (newIm[i] > 165) newIm[i] = 255;
-        if ((newIm[i] != 0) && (newIm[i] != 255)) newIm[i] = 100;
-    }
-*/
 //Filter operators
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
@@ -99,31 +102,31 @@ int main() {
             MyImage[iw*i+j] = s;
         }
     }
-/*
+*/
     //third image craetion
     for (i = 0; i < ih*iw; i++) {
         if (MyImage[i] > newIm[i]) {
             newIm[i] = MyImage[i];
         }
     }
-*/
+
     int col[iw*ih];
     for (i = 0; i < iw*ih; i++) col[i] = 0;
-    k = 55;
+    k = 1;
     printf("problem in dfs\n");
     //dfs making
     for (i = 0; i < iw*ih; i++) {
         if (col[i] == 0) {
             dfs(i, k, iw, ih, col, newIm);
-            k = k + 50;
+            k = k + 1;
         }
     }
     printf("Problem with coloring\n");
     //now have to color the colors from col
     for (i = 0; i < iw*ih-3; i++) {
-        odata[i*n] = 78+col[i]+0.5*col[i+1];
-        odata[i*n+1] = 46+col[i]+0.7*col[i+2];
-        odata[i*n+2] = 153+col[i]+0.5*col[i+3];
+        odata[i*n] = 30*col[i];
+        odata[i*n+1] = 46*col[i];
+        odata[i*n+2] = 15*col[i];
         if (n == 4) odata[i*n+3] = 255;
     }
     //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
