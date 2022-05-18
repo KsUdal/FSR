@@ -14,23 +14,23 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     col[v] = color;
     if (v+iw+1 < iw*ih) {
         r = mat[v+iw+1];
-        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 25)) dfs(v+iw+1, color, iw, ih, col, mat);
+        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 15)) dfs(v+iw+1, color, iw, ih, col, mat);
     }
 
     if (v-iw-1 > 0) {
         l = mat[v-iw-1];
-        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 25)) dfs(v-iw-1, color, iw, ih, col, mat);
+        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 15)) dfs(v-iw-1, color, iw, ih, col, mat);
     }
 
 
     if (v-iw+1 > 0) {
         u = mat[v-iw+1];
-        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 25)) dfs(v-iw+1, color, iw, ih, col, mat);
+        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 15)) dfs(v-iw+1, color, iw, ih, col, mat);
     }
 
     if (v+iw-1 < ih*iw) {
         d = mat[v+iw-1];
-        if ((col[v+iw-1] == 0) && (abs(mat[v] - d) < 5)) dfs(v+iw-1, color, iw, ih, col, mat);
+        if ((col[v+iw-1] == 0) && (abs(mat[v] - d) < 15)) dfs(v+iw-1, color, iw, ih, col, mat);
     }
 
 }
@@ -57,10 +57,10 @@ int main() {
     unsigned char* odata = (unsigned char*)malloc(ih*iw*n*sizeof(unsigned char));
     unsigned char* newIm = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < ih*iw*n; i = i + n) {
-        newIm[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
+        MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
-/*
+
     //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
@@ -68,8 +68,8 @@ int main() {
             if (MyImage[iw*i+j] > 180) MyImage[iw*i+j] = 255;
         }
     }
-*/
 
+/*
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
             if (newIm[iw*i+j] < 80) newIm[iw*i+j] = 0;
@@ -86,7 +86,7 @@ int main() {
             MyImage[iw*i+j] = s;
         }
     }
-
+*/
     //only Gauss
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
@@ -109,13 +109,14 @@ int main() {
             MyImage[iw*i+j] = s;
         }
     }
-*/
+
     //third image craetion
     for (i = 0; i < ih*iw; i++) {
         if (MyImage[i] > newIm[i]) {
             newIm[i] = MyImage[i];
         }
     }
+*/
 
     int col[iw*ih];
     for (i = 0; i < iw*ih; i++) col[i] = 0;
@@ -130,10 +131,10 @@ int main() {
     }
     printf("Problem with coloring\n");
     //now have to color the colors from col
-    for (i = 0; i < iw*ih-3; i++) {
-        odata[i*n] = 30*col[i];
-        odata[i*n+1] = 46*col[i];
-        odata[i*n+2] = 15*col[i];
+    for (i = 1; i < iw*ih-1; i++) {
+        odata[i*n] = 20*col[i]+(10*col[i-1]+15*col[i+1]);
+        odata[i*n+1] = 46*col[i]+(10*col[i-1]+15*col[i+1]);
+        odata[i*n+2] = 15*col[i]+10*col[i-1]+20*col[i+1];
         if (n == 4) odata[i*n+3] = 255;
     }
     //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
