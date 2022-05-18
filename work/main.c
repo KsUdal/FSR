@@ -43,8 +43,8 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
 int main() {
 
     // строка, путь к файлу
-    char*inputPath = "hampster.png";
-    //char*inputPath = "tooth.png";
+    //char*inputPath = "hampster.png";
+    char*inputPath = "tooth.png";
     //char*inputPath = "arm_break.png";
     //char*inputPath = "Arrow_head.png";
     int iw, ih, n; //ширина, высота и количество цветовых каналов
@@ -136,7 +136,7 @@ int main() {
     int col[iw*ih];
     for (i = 0; i < iw*ih; i++) col[i] = 0;
     k = 1;
-    printf("problem in dfs\n");
+    //printf("problem in dfs\n");
     //dfs making
     for (i = 0; i < iw*ih; i++) {
         if (col[i] == 0) {
@@ -144,7 +144,7 @@ int main() {
             k = k + 1;
         }
     }
-    printf("Problem with coloring\n");
+    //printf("Problem with coloring\n");
     //now have to color the colors from col
     for (i = 1; i < iw*ih-1; i++) {
         odata[i*n] = 20*col[i]+(10*col[i-1]+15*col[i+1]);
@@ -158,13 +158,13 @@ int main() {
     //char* outputPath = "output_arrow_head.png";
     //char* outputPath = "output_arm_break.png";
     //char* outputPath = "output_hamster.png";
-    //char* outputPath = "output_tooth.png";
-    char* outputPath = "output.png";
+    char* outputPath = "output_tooth.png";
+    //char* outputPath = "output.png";
 
     // записываем картинку
     int one = 1; int zero = 0;
-    stbi_write_png(outputPath, iw, ih, 1, newIm, 0);
-    //stbi_write_png(outputPath, iw, ih, n, odata, 0);
+    //stbi_write_png(outputPath, iw, ih, 1, newIm, 0);
+    stbi_write_png(outputPath, iw, ih, n, odata, 0);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
