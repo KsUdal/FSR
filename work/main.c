@@ -16,18 +16,18 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
         r = mat[v+iw+1];
         if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 10)) dfs(v+iw+1, color, iw, ih, col, mat);
     }
-/*
+
     if (v-iw-1 > 0) {
         l = mat[v-iw-1];
         if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 10)) dfs(v-iw-1, color, iw, ih, col, mat);
     }
-*/
-/*
+
+
     if (v-iw+1 > 0) {
         u = mat[v-iw+1];
         if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 10)) dfs(v-iw+1, color, iw, ih, col, mat);
     }
-*/
+
     if (v+iw-1 < ih*iw) {
         d = mat[v+iw-1];
         if ((col[v+iw-1] == 0) && (abs(mat[v] - d) < 10)) dfs(v+iw-1, color, iw, ih, col, mat);
@@ -87,20 +87,25 @@ int main() {
         if ((newIm[i] != 0) && (newIm[i] != 255)) newIm[i] = 100;
     }
 */
-/*
-    for (i = 0; i < ih*iw; i++) {
-        if (newIm[i] < 50) {
-            odata[i*n] = 150;
-            odata[i*n+1] = 146;
-            odata[i*n+2] = 134;
-            if (n == 4) odata[i*n+4] = 200;
+//Filter operators
+    unsigned char x, y, s;
+    for (i = 2; i < ih - 1; i++) {
+        for (j = 2; j < iw - 1; j++) {
+
+            //Roberts
+            x = newIm[iw*(i-1)+(j-1)] - newIm[iw*i+j];
+            y = newIm[iw*(i-1)+j] - newIm[iw*i+(j+1)];
+            s = sqrt(x*x + y*y);
+            MyImage[iw*i+j] = s;
         }
-        if (newIm[i] > 150) odata[i*(n-2)] = 220;
-        if ((newIm[i] <= 150) && (newIm[i] >= 50)) odata[i*(n-1)] = 230;
     }
-*/
-    //graph making
-    //int used[ih*iw];
+
+    //third image craetion
+    for (i = 0; i < ih*iw; i++) {
+        if (MyImage[i] > newIm[i]) {
+            newIm[i] = MyImage[i];
+        }
+    }
 
     int col[iw*ih];
     for (i = 0; i < iw*ih; i++) col[i] = 0;
@@ -132,7 +137,8 @@ int main() {
 
     // записываем картинку
     int one = 1; int zero = 0;
-    stbi_write_png(outputPath, iw, ih, n, odata, 0);
+    //stbi_write_png(outputPath, iw, ih, n, odata, 0);
+    stbi_write_png(outputPath, iw, ih, 1, newIm, 0);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
