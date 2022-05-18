@@ -72,8 +72,8 @@ int main() {
     //only Gauss
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            newIm[iw*i+j] = 0.15*MyImage[iw*i+j] + 0.12*MyImage[iw*(i+1)+j] + 0.12*MyImage[iw*(i-1)+j];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.12*MyImage[iw*i+(j+1)] + 0.12*MyImage[iw*i+(j-1)];
+            newIm[iw*i+j] = 0.16*MyImage[iw*i+j] + 0.16*MyImage[iw*(i+1)+j] + 0.16*MyImage[iw*(i-1)+j];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.15*MyImage[iw*i+(j+1)] + 0.16*MyImage[iw*i+(j-1)];
             newIm[iw*i+j] = newIm[iw*i+j] + 0.09*MyImage[iw*(i+1)+(j+1)] + 0.09*MyImage[iw*(i+1)+(j-1)];
             newIm[iw*i+j] = newIm[iw*i+j] + 0.09*MyImage[iw*(i-1)+(j+1)] + 0.09*MyImage[iw*(i-1)+(j-1)];
         }
