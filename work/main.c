@@ -14,18 +14,18 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     col[v] = color;
     if (v+iw+1 < iw*ih) {
         r = mat[v+iw+1];
-        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 5)) dfs(v+iw+1, color, iw, ih, col, mat);
+        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 25)) dfs(v+iw+1, color, iw, ih, col, mat);
     }
 
     if (v-iw-1 > 0) {
         l = mat[v-iw-1];
-        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 5)) dfs(v-iw-1, color, iw, ih, col, mat);
+        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 25)) dfs(v-iw-1, color, iw, ih, col, mat);
     }
 
 
     if (v-iw+1 > 0) {
         u = mat[v-iw+1];
-        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 5)) dfs(v-iw+1, color, iw, ih, col, mat);
+        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 25)) dfs(v-iw+1, color, iw, ih, col, mat);
     }
 
     if (v+iw-1 < ih*iw) {
@@ -57,18 +57,25 @@ int main() {
     unsigned char* odata = (unsigned char*)malloc(ih*iw*n*sizeof(unsigned char));
     unsigned char* newIm = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < ih*iw*n; i = i + n) {
-        MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
+        newIm[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
-
+/*
     //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 160) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 80) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 180) MyImage[iw*i+j] = 255;
         }
     }
-/*
+*/
+
+    for (i = 2; i < ih-1; i++) {
+        for (j = 2; j < iw-1; j++) {
+            if (newIm[iw*i+j] < 80) newIm[iw*i+j] = 0;
+            if (newIm[iw*i+j] > 180) newIm[iw*i+j] = 255;
+        }
+    }
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
         for (j = 2; j < iw - 1; j++) {
@@ -79,7 +86,7 @@ int main() {
             MyImage[iw*i+j] = s;
         }
     }
-*/
+
     //only Gauss
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
