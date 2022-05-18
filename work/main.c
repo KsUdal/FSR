@@ -101,6 +101,14 @@ int main() {
         }
     }
 
+    //contrast again
+    for (i = 0; i < ih*iw; i++) {
+        if (newIm[i] < 20) newIm[i] = 0;
+        if (newIm[i] > 120) newIm[i] = 255;
+        if ((newIm[i] != 0) && (newIm[i] != 255)) newIm[i] = 160;
+    }
+
+
     //char* outputPath = "output_arrow_head.png";
     //char* outputPath = "output_arm_break.png";
     //char* outputPath = "output_hamster.png";
