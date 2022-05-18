@@ -14,23 +14,23 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     col[v] = color;
     if (v+iw+1 < iw*ih) {
         r = mat[v+iw+1];
-        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 15)) dfs(v+iw+1, color, iw, ih, col, mat);
+        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 8)) dfs(v+iw+1, color, iw, ih, col, mat);
     }
 
     if (v-iw-1 > 0) {
         l = mat[v-iw-1];
-        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 15)) dfs(v-iw-1, color, iw, ih, col, mat);
+        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 8)) dfs(v-iw-1, color, iw, ih, col, mat);
     }
 
 
     if (v-iw+1 > 0) {
         u = mat[v-iw+1];
-        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 15)) dfs(v-iw+1, color, iw, ih, col, mat);
+        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 8)) dfs(v-iw+1, color, iw, ih, col, mat);
     }
 
     if (v+iw-1 < ih*iw) {
         d = mat[v+iw-1];
-        if ((col[v+iw-1] == 0) && (abs(mat[v] - d) < 15)) dfs(v+iw-1, color, iw, ih, col, mat);
+        if ((col[v+iw-1] == 0) && (abs(mat[v] - d) < 8)) dfs(v+iw-1, color, iw, ih, col, mat);
     }
 
 }
@@ -64,7 +64,7 @@ int main() {
     //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (MyImage[iw*i+j] < 80) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] < 95) MyImage[iw*i+j] = 0;
             if (MyImage[iw*i+j] > 180) MyImage[iw*i+j] = 255;
         }
     }
