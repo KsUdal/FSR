@@ -8,9 +8,15 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-// Макроподстановка, меняющая p(i, j) на  idata[(i)+(j)*iw]
-
-//#define p(i, j)  idata[(i)+(j)*iw] условное обозначение, которое может и не понадобиться
+void dfs(int v, int color, int N, int* col, int**mat) {
+    int i, j;
+    col[v] = color;
+    for (i = 0; i < N; i++) {
+        if ((mat[i][v] == 1) && (col[i] == 0)) {
+            dfs(i, color, N, col, mat);
+        }
+    }
+}
 
 int main() {
 
@@ -31,7 +37,7 @@ int main() {
     int i, k, j;
     k = 0;
     unsigned char* MyImage = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
-    unsigned char* odata = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
+    unsigned char* odata = (unsigned char*)malloc(ih*iw*n*sizeof(unsigned char));
     unsigned char* newIm = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < ih*iw*n; i = i + n) {
         MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
@@ -46,21 +52,6 @@ int main() {
         }
     }
 
-/*
-    //Filter operators
-    unsigned char x, y, s;
-    for (i = 2; i < ih - 1; i++) {
-        for (j = 2; j < iw - 1; j++) {
-            //Roberts
-            x = MyImage[iw*(i-1)+(j-1)] - MyImage[iw*i+j];
-            y = MyImage[iw*(i-1)+j] - MyImage[iw*i+(j+1)];
-            s = sqrt(x*x + y*y);
-            odata[iw*i+j] = s;
-        }
-    }
-*/
-
-
     //only Gauss
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
@@ -71,13 +62,57 @@ int main() {
         }
     }
 
+/* don't want it right now
     //contrast again
     for (i = 0; i < ih*iw; i++) {
         if (newIm[i] < 20) newIm[i] = 0;
         if (newIm[i] > 165) newIm[i] = 255;
         if ((newIm[i] != 0) && (newIm[i] != 255)) newIm[i] = 100;
     }
+*/
+    for (i = 0; i < ih*iw; i++) {
+        if (newIm[i] < 50) odata[i*(n-2)] = 150;
+        if (newIm[i] > 150) odata[i*(n-2)] = 220;
+    }
+/*
+    //graph making
+    //int mat[ih*iw][ih*iw];
+    int** mat = (int**)malloc(iw*ih*sizeof(int*));
+    for (i = 0; i < iw*ih; i++) {
+        mat[i] = (int*)malloc(iw*ih*sizeof(int));
+    }
 
+    for (i = 1; i < ih*iw; i++) {
+        for (j = 1; j < iw*ih; j++) {
+            mat[i][j] = 0;
+            if (abs(newIm[i] - newIm[j]) < 30) {
+                mat[i][j] = 1;
+                mat[j][i] = 1;
+            }
+        }
+    }
+
+    int col[iw*ih];
+    for (i = 0; i < iw*ih; i++) col[i] = 0;
+    k = 1;
+    printf("problem in dfs\n");
+    //dfs making
+    for (i = 0; i < iw*ih; i++) {
+        if (col[i] == 0) {
+            dfs(i, k, iw*ih, col, mat);
+            k = k + 1;
+        }
+    }
+
+    k = 0;
+    for (i = 0; i < ih*iw; i++) {
+        for (j = k; j < k+n; j++) {
+            idata[j] = col[i]*30;
+        }
+        k = k + n;
+    }
+*/
+    //going back to n channels
 
     //char* outputPath = "output_arrow_head.png";
     //char* outputPath = "output_arm_break.png";
@@ -87,11 +122,12 @@ int main() {
 
     // записываем картинку
     int one = 1; int zero = 0;
-    stbi_write_png(outputPath, iw, ih, one, newIm, zero);
+    stbi_write_png(outputPath, iw, ih, n, odata, zero);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
-    //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
+    printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
+    stbi_image_free(newIm);
     stbi_image_free(MyImage);
-    stbi_image_free(odata);
+    //stbi_image_free(odata);
     return 0;
 }
