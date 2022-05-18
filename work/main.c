@@ -50,25 +50,9 @@ int main() {
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
         for (j = 2; j < iw - 1; j++) {
-
             //Roberts
             x = MyImage[iw*(i-1)+(j-1)] - MyImage[iw*i+j];
             y = MyImage[iw*(i-1)+j] - MyImage[iw*i+(j+1)];
-/*
-            //casual Sobel
-            x = MyImage[iw*(i-1)+(j-1)] + 2*MyImage[iw*i+(j-1)] + MyImage[iw*(i+1)+(j-1)];
-            x = x - MyImage[iw*(i-1)+(j+1)] - 2*MyImage[iw*i+(j+1)] - MyImage[iw*(i+1)+(j+1)];
-            y = MyImage[iw*(i-1)+(j-1)] + 2*MyImage[iw*(i-1)+j] + MyImage[iw*(i-1)+(j+1)];
-            y = y - MyImage[iw*(i+1)+(j-1)] - 2*MyImage[iw*(i+1)+j] - MyImage[iw*(i+1)+(j+1)];
-
-*/
-/*
-            //just an experiment
-            x = 0.5*MyImage[iw*(i-1)+(j-1)] + MyImage[iw*i+(j-1)] + 0.5*MyImage[iw*(i+1)+(j-1)];
-            x = x - 0.5*MyImage[iw*(i-1)+(j+1)] - MyImage[iw*i+(j+1)] - 0.5*MyImage[iw*(i+1)+(j+1)];
-            y = 0.5*MyImage[iw*(i-1)+(j-1)] + MyImage[iw*(i-1)+j] + 0.5*MyImage[iw*(i-1)+(j+1)];
-            y = y - 0.5*MyImage[iw*(i+1)+(j-1)] - MyImage[iw*(i+1)+j] - 0.5*MyImage[iw*(i+1)+(j+1)];
-*/
             s = sqrt(x*x + y*y);
             odata[iw*i+j] = s;
         }
@@ -92,6 +76,16 @@ int main() {
         }
     }
 
+    //Gauss
+    for (i = 1; i < ih-1; i++) {
+        for (j = 2; j < iw-1; j++) {
+            MyImage[iw*i+j] = 0.0707355*newIm[iw*i+j] + 0.0566406*newIm[iw*(i+1)+j] + 0.0566406*newIm[iw*(i-1)+j];
+            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0566406*newIm[iw*i+(j+1)] + 0.0566406*newIm[iw*i+(j-1)];
+            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.453542*newIm[iw*(i+1)+(j+1)] + 0.0453542*newIm[iw*(i+1)+(j-1)];
+            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.453542*newIm[iw*(i-1)+(j+1)] + 0.0453542*newIm[iw*(i-1)+(j-1)];
+        }
+    }
+
     //char* outputPath = "output_arrow_head.png";
     //char* outputPath = "output_arm_break.png";
     //char* outputPath = "output_hamster.png";
@@ -100,7 +94,7 @@ int main() {
 
     // записываем картинку
     int one = 1; int zero = 0;
-    stbi_write_png(outputPath, iw, ih, one, newIm, zero);
+    stbi_write_png(outputPath, iw, ih, one, MyImage, zero);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
