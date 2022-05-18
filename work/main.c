@@ -74,7 +74,7 @@ int main() {
     //contrast again
     for (i = 0; i < ih*iw; i++) {
         if (newIm[i] < 20) newIm[i] = 0;
-        if (newIm[i] > 150) newIm[i] = 255;
+        if (newIm[i] > 165) newIm[i] = 255;
         if ((newIm[i] != 0) && (newIm[i] != 255)) newIm[i] = 100;
     }
 
