@@ -12,28 +12,26 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     //printf("In dfs with v = %d\n", v);
     int i, j, u, d, r, l;
     col[v] = color;
-    if (v+1 < iw*ih) {
-        r = mat[v+1];
-        if ((col[v+1] == 0) && (abs(mat[v] - r) < 20)) dfs(v+1, color, iw, ih, col, mat);
+    if (v+iw+1 < iw*ih) {
+        r = mat[v+iw+1];
+        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 20)) dfs(v+iw+1, color, iw, ih, col, mat);
     }
 
-    if (v-1 > 0) {
-        l = mat[v-1];
-        if ((col[v-1] == 0) && (abs(mat[v] - l) < 20)) dfs(v-1, color, iw, ih, col, mat);
+    if (v-iw-1 > 0) {
+        l = mat[v-iw-1];
+        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 20)) dfs(v-iw-1, color, iw, ih, col, mat);
     }
 
-    //else {
-    if (v-iw > 0) {
-        u = mat[v-iw];
-        if ((col[v-iw] == 0) && (abs(mat[v] - u) < 20)) dfs(v-iw, color, iw, ih, col, mat);
+    if (v-iw+1 > 0) {
+        u = mat[v-iw+1];
+        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 20)) dfs(v-iw+1, color, iw, ih, col, mat);
     }
-    //}
-/*
-    if (v+iw < ih*iw) {
-        d = mat[v+iw];
-        if ((col[v+iw] == 0) && (abs(mat[v] - d) < 20)) dfs(v+iw, color, iw, ih, col, mat);
+
+    if (v+iw-1 < ih*iw) {
+        d = mat[v+iw-1];
+        if ((col[v+iw-1] == 0) && (abs(mat[v] - d) < 20)) dfs(v+iw-1, color, iw, ih, col, mat);
     }
-*/
+
 }
 
 int main() {
