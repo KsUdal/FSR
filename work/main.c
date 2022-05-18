@@ -14,7 +14,7 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     col[v] = color;
     if (v+1 < iw*ih) {
         r = mat[v+1];
-        if ((col[v+1] == 0) && (abs(mat[v] - r) < 2)) dfs(v+1, color, iw, ih, col, mat);
+        if ((col[v+1] == 0) && (abs(mat[v] - r) < 1)) dfs(v+1, color, iw, ih, col, mat);
     }
     /*
     if (v-1 > 0) {
@@ -28,7 +28,7 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     */
     if (v+iw < ih*iw) {
         d = mat[v+iw];
-        if ((col[v+iw] == 0) && (abs(mat[v] - d) < 2)) dfs(v+iw, color, iw, ih, col, mat);
+        if ((col[v+iw] == 0) && (abs(mat[v] - d) < 1)) dfs(v+iw, color, iw, ih, col, mat);
     }
 }
 
