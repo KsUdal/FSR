@@ -71,6 +71,7 @@ int main() {
         for (j = 2; j < iw-1; j++) {
             if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
             if (MyImage[iw*i+j] > 160) MyImage[iw*i+j] = 255;
+            if ((MyImage[iw*i+j] != 0) && (MyImage[i*iw+j] != 255)) MyImage[i*iw+j] = 170;
         }
     }
 
