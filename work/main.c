@@ -84,8 +84,8 @@ int main() {
         for (j = 2; j < iw-1; j++) {
             MyImage[iw*i+j] = 0.0707355*newIm[iw*i+j] + 0.0566406*newIm[iw*(i+1)+j] + 0.0566406*newIm[iw*(i-1)+j];
             MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0566406*newIm[iw*i+(j+1)] + 0.0566406*newIm[iw*i+(j-1)];
-            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.453542*newIm[iw*(i+1)+(j+1)] + 0.0453542*newIm[iw*(i+1)+(j-1)];
-            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.453542*newIm[iw*(i-1)+(j+1)] + 0.0453542*newIm[iw*(i-1)+(j-1)];
+            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0453542*newIm[iw*(i+1)+(j+1)] + 0.0453542*newIm[iw*(i+1)+(j-1)];
+            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0453542*newIm[iw*(i-1)+(j+1)] + 0.0453542*newIm[iw*(i-1)+(j-1)];
         }
     }
 */
@@ -95,8 +95,8 @@ int main() {
         for (j = 2; j < iw-1; j++) {
             newIm[iw*i+j] = 0.0707355*MyImage[iw*i+j] + 0.0566406*MyImage[iw*(i+1)+j] + 0.0566406*MyImage[iw*(i-1)+j];
             newIm[iw*i+j] = newIm[iw*i+j] + 0.0566406*MyImage[iw*i+(j+1)] + 0.0566406*MyImage[iw*i+(j-1)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.453542*MyImage[iw*(i+1)+(j+1)] + 0.0453542*MyImage[iw*(i+1)+(j-1)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.453542*MyImage[iw*(i-1)+(j+1)] + 0.0453542*MyImage[iw*(i-1)+(j-1)];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.0453542*MyImage[iw*(i+1)+(j+1)] + 0.0453542*MyImage[iw*(i+1)+(j-1)];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.0453542*MyImage[iw*(i-1)+(j+1)] + 0.0453542*MyImage[iw*(i-1)+(j-1)];
         }
     }
 
