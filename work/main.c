@@ -120,10 +120,10 @@ int main() {
     }
     printf("Problem with coloring\n");
     //now have to color the colors from col
-    for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = 78+col[i]+0.5*col[i-1];
-        odata[i*n+1] = 46+col[i];
-        odata[i*n+2] = 153+col[i];
+    for (i = 0; i < iw*ih-3; i++) {
+        odata[i*n] = 78+col[i]+0.5*col[i+1];
+        odata[i*n+1] = 46+col[i]+0.7*col[i+2];
+        odata[i*n+2] = 153+col[i]+0.5*col[i+3];
         if (n == 4) odata[i*n+3] = 255;
     }
     //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
