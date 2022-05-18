@@ -62,17 +62,18 @@ int main() {
         }
     }
 
-/* don't want it right now
+    //don't want it right now
     //contrast again
     for (i = 0; i < ih*iw; i++) {
         if (newIm[i] < 20) newIm[i] = 0;
         if (newIm[i] > 165) newIm[i] = 255;
         if ((newIm[i] != 0) && (newIm[i] != 255)) newIm[i] = 100;
     }
-*/
+
     for (i = 0; i < ih*iw; i++) {
         if (newIm[i] < 50) odata[i*(n-2)] = 150;
         if (newIm[i] > 150) odata[i*(n-2)] = 220;
+        if ((newIm[i] <= 150) && (newIm[i] >= 50)) odata[i*(n-1)] = 230;
     }
 /*
     //graph making
