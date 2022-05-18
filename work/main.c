@@ -112,10 +112,10 @@ int main() {
     printf("Problem with coloring\n");
     //now have to color the colors from col
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = (50*col[i])%256;
-        odata[i*n+1] = (75*col[i])%256;
+        odata[i*n] = (76*col[i])%256;
+        odata[i*n+1] = (89*col[i])%256;
         odata[i*n+2] = (100*col[i])%256;
-        if (n == 4) odata[i*n+3] = 255;
+        if (n == 4) odata[i*n+3] = 200;
     }
     //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
     //going back to n channels
