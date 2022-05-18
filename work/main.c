@@ -82,7 +82,7 @@ int main() {
     //Gauss
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            MyImage[iw*i+j] = 0.1538*newIm[iw*i+j] + 0.1192*newIm[iw*(i+1)+j] + 0.1192*newIm[iw*(i-1)+j];
+            MyImage[iw*i+j] = 0.1238*newIm[iw*i+j] + 0.1192*newIm[iw*(i+1)+j] + 0.1192*newIm[iw*(i-1)+j];
             MyImage[iw*i+j] = MyImage[iw*i+j] + 0.1192*newIm[iw*i+(j+1)] + 0.1192*newIm[iw*i+(j-1)];
             MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0924*newIm[iw*(i+1)+(j+1)] + 0.0924*newIm[iw*(i+1)+(j-1)];
             MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0924*newIm[iw*(i-1)+(j+1)] + 0.0924*newIm[iw*(i-1)+(j-1)];
