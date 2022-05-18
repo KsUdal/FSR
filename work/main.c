@@ -99,14 +99,14 @@ int main() {
             MyImage[iw*i+j] = s;
         }
     }
-
+/*
     //third image craetion
     for (i = 0; i < ih*iw; i++) {
         if (MyImage[i] > newIm[i]) {
             newIm[i] = MyImage[i];
         }
     }
-
+*/
     int col[iw*ih];
     for (i = 0; i < iw*ih; i++) col[i] = 0;
     k = 55;
