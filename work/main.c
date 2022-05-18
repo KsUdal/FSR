@@ -65,7 +65,7 @@ int main() {
         MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
-
+/*
     //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
@@ -74,7 +74,7 @@ int main() {
             //if ((MyImage[iw*i+j] != 0) && (MyImage[i*iw+j] != 255)) MyImage[i*iw+j] = 170;
         }
     }
-
+*/
 /*
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
@@ -96,14 +96,14 @@ int main() {
     //only Gauss (new)
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            newIm[iw*i+j] = 0.159*MyImage[iw*i+j] + 0.097*MyImage[iw*(i+1)+j] + 0.097*MyImage[iw*(i-1)+j];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.097*MyImage[iw*i+(j+1)] + 0.097*MyImage[iw*i+(j-1)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.059*MyImage[iw*(i+1)+(j+1)] + 0.059*MyImage[iw*(i+1)+(j-1)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.059*MyImage[iw*(i-1)+(j+1)] + 0.059*MyImage[iw*(i-1)+(j-1)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.022*MyImage[iw*(i-2)+j] + 0.022*MyImage[iw*(i+2)+j];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.022*MyImage[iw*i+(j+2)] + 0.022*MyImage[iw*i+(j-2)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.013*MyImage[iw*(i+2)+(j+2)] + 0.013*MyImage[iw*(i+2)+(j-2)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.013*MyImage[iw*(i-2)+(j+2)] + 0.013*MyImage[iw*(i-2)+(j-2)];
+            newIm[iw*i+j] = 0.159*MyImage[iw*i+j] + 0.097*MyImage[iw*(i+1)+j] + 0.097*MyImage[iw*(i-1)+j]
+            + 0.097*MyImage[iw*i+(j+1)] + 0.097*MyImage[iw*i+(j-1)]
+            + 0.059*MyImage[iw*(i+1)+(j+1)] + 0.059*MyImage[iw*(i+1)+(j-1)]
+            + 0.059*MyImage[iw*(i-1)+(j+1)] + 0.059*MyImage[iw*(i-1)+(j-1)]
+            + 0.022*MyImage[iw*(i-2)+j] + 0.022*MyImage[iw*(i+2)+j]
+            + 0.022*MyImage[iw*i+(j+2)] + 0.022*MyImage[iw*i+(j-2)]
+            + 0.013*MyImage[iw*(i+2)+(j+2)] + 0.013*MyImage[iw*(i+2)+(j-2)]
+            + 0.013*MyImage[iw*(i-2)+(j+2)] + 0.013*MyImage[iw*(i-2)+(j-2)];
         }
     }
 /*
