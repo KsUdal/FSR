@@ -35,6 +35,8 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
 
     if (ur+d > 0) col[v+iw] = color;
     if (ur+u > 0) col[v+1] = color;
+    if (l+u > 0) col[v-iw] = color;
+    if (l+d > 0) col[v-1] = color;
 
 }
 
@@ -67,8 +69,8 @@ int main() {
     //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (MyImage[iw*i+j] < 95) MyImage[iw*i+j] = 0;
-            if (MyImage[iw*i+j] > 180) MyImage[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 160) MyImage[iw*i+j] = 255;
         }
     }
 
