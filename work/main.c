@@ -71,7 +71,12 @@ int main() {
     }
 
     for (i = 0; i < ih*iw; i++) {
-        if (newIm[i] < 50) odata[i*(n-2)] = 150;
+        if (newIm[i] < 50) {
+            odata[i*n] = 150;
+            odata[i*n+1] = 146;
+            odata[i*n+2] = 134;
+            if (n == 4) odata[i*n+4] = 200;
+        }
         if (newIm[i] > 150) odata[i*(n-2)] = 220;
         if ((newIm[i] <= 150) && (newIm[i] >= 50)) odata[i*(n-1)] = 230;
     }
