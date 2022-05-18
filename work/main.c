@@ -14,7 +14,7 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     col[v] = color;
     if (v+1 < iw*ih) {
         r = mat[v+1];
-        if ((col[v+1] == 0) && (abs(mat[v] - r) < 50)) dfs(v+1, color, iw, ih, col, mat);
+        if ((col[v+1] == 0) && (abs(mat[v] - r) < 40)) dfs(v+1, color, iw, ih, col, mat);
     }
     /*
     if (v-1 > 0) {
@@ -28,7 +28,7 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     */
     if (v+iw < ih*iw) {
         d = mat[v+iw];
-        if ((col[v+iw] == 0) && (abs(mat[v] - d) < 50)) dfs(v+iw, color, iw, ih, col, mat);
+        if ((col[v+iw] == 0) && (abs(mat[v] - d) < 40)) dfs(v+iw, color, iw, ih, col, mat);
     }
 }
 
@@ -100,22 +100,22 @@ int main() {
 
     int col[iw*ih];
     for (i = 0; i < iw*ih; i++) col[i] = 0;
-    k = 1;
+    k = 25;
     printf("problem in dfs\n");
     //dfs making
     for (i = 0; i < iw*ih; i++) {
         if (col[i] == 0) {
             dfs(i, k, iw, ih, col, newIm);
-            k = k + 1;
+            k = k + 50;
         }
     }
     printf("Problem with coloring\n");
     //now have to color the colors from col
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = (76*col[i])%256;
-        odata[i*n+1] = (89*col[i])%256;
-        odata[i*n+2] = (100*col[i])%256;
-        if (n == 4) odata[i*n+3] = 200;
+        odata[i*n] = (50+col[i])%256;
+        odata[i*n+1] = (75+col[i])%256;
+        odata[i*n+2] = (100+col[i])%256;
+        if (n == 4) odata[i*n+3] = 255;
     }
     //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
     //going back to n channels
