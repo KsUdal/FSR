@@ -14,22 +14,22 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
     col[v] = color;
     if (v+iw+1 < iw*ih) {
         r = mat[v+iw+1];
-        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 20)) dfs(v+iw+1, color, iw, ih, col, mat);
+        if ((col[v+iw+1] == 0) && (abs(mat[v] - r) < 40)) dfs(v+iw+1, color, iw, ih, col, mat);
     }
 
     if (v-iw-1 > 0) {
         l = mat[v-iw-1];
-        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 20)) dfs(v-iw-1, color, iw, ih, col, mat);
+        if ((col[v-iw-1] == 0) && (abs(mat[v] - l) < 40)) dfs(v-iw-1, color, iw, ih, col, mat);
     }
 
     if (v-iw+1 > 0) {
         u = mat[v-iw+1];
-        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 20)) dfs(v-iw+1, color, iw, ih, col, mat);
+        if ((col[v-iw+1] == 0) && (abs(mat[v] - u) < 40)) dfs(v-iw+1, color, iw, ih, col, mat);
     }
 
     if (v+iw-1 < ih*iw) {
         d = mat[v+iw-1];
-        if ((col[v+iw-1] == 0) && (abs(mat[v] - d) < 20)) dfs(v+iw-1, color, iw, ih, col, mat);
+        if ((col[v+iw-1] == 0) && (abs(mat[v] - d) < 40)) dfs(v+iw-1, color, iw, ih, col, mat);
     }
 
 }
@@ -115,9 +115,9 @@ int main() {
     printf("Problem with coloring\n");
     //now have to color the colors from col
     for (i = 0; i < iw*ih; i++) {
-        odata[i*n] = (2*col[i])%256;
+        odata[i*n] = (78+col[i])%256;
         odata[i*n+1] = (46+col[i])%256;
-        odata[i*n+2] = (col[i])%256;
+        odata[i*n+2] = (153+col[i])%256;
         if (n == 4) odata[i*n+3] = 255;
     }
     //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
