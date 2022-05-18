@@ -163,8 +163,8 @@ int main() {
 
     // записываем картинку
     int one = 1; int zero = 0;
+    stbi_write_png(outputPath, iw, ih, 1, newIm, 0);
     //stbi_write_png(outputPath, iw, ih, n, odata, 0);
-    stbi_write_png(outputPath, iw, ih, n, odata, 0);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
