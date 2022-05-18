@@ -71,7 +71,7 @@ int main() {
         for (j = 2; j < iw-1; j++) {
             if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
             if (MyImage[iw*i+j] > 160) MyImage[iw*i+j] = 255;
-            if ((MyImage[iw*i+j] != 0) && (MyImage[i*iw+j] != 255)) MyImage[i*iw+j] = 170;
+            //if ((MyImage[iw*i+j] != 0) && (MyImage[i*iw+j] != 255)) MyImage[i*iw+j] = 170;
         }
     }
 
@@ -100,6 +100,10 @@ int main() {
             newIm[iw*i+j] = newIm[iw*i+j] + 0.097*MyImage[iw*i+(j+1)] + 0.097*MyImage[iw*i+(j-1)];
             newIm[iw*i+j] = newIm[iw*i+j] + 0.059*MyImage[iw*(i+1)+(j+1)] + 0.059*MyImage[iw*(i+1)+(j-1)];
             newIm[iw*i+j] = newIm[iw*i+j] + 0.059*MyImage[iw*(i-1)+(j+1)] + 0.059*MyImage[iw*(i-1)+(j-1)];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.022*MyImage[iw*(i-2)+j] + 0.022*MyImage[iw*(i+2)+j];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.022*MyImage[iw*i+(j+2)] + 0.022*MyImage[iw*i+(j-2)];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.013*MyImage[iw*(i+2)+(j+2)] + 0.013*MyImage[iw*(i+2)+(j-2)];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.013*MyImage[iw*(i-2)+(j+2)] + 0.013*MyImage[iw*(i-2)+(j-2)];
         }
     }
 /*
