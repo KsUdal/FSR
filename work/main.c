@@ -103,7 +103,7 @@ int main() {
     k = 1;
     printf("problem in dfs\n");
     //dfs making
-    for (i = 0; i < (iw-1)*(ih-1); i++) {
+    for (i = 0; i < iw*ih; i++) {
         if (col[i] == 0) {
             dfs(i, k, iw, ih, col, newIm);
             k = k + 1;
@@ -113,9 +113,9 @@ int main() {
     //now have to color the colors from col
     for (i = 0; i < iw*ih; i++) {
         odata[i*n] = 50*col[i];
-        odata[i*n+1] = 40*col[i];
-        odata[i*n+2] = 30*col[i];
-        if (n == 4) odata[i*n+3] = 60*col[i];
+        odata[i*n+1] = 75*col[i];
+        odata[i*n+2] = 100*col[i];
+        if (n == 4) odata[i*n+3] = 255;
     }
     //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
     //going back to n channels
