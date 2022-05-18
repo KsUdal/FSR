@@ -57,18 +57,18 @@ int main() {
     unsigned char* odata = (unsigned char*)malloc(ih*iw*n*sizeof(unsigned char));
     unsigned char* newIm = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < ih*iw*n; i = i + n) {
-        newIm[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
+        MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
 
     //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            if (newIm[iw*i+j] < 100) newIm[iw*i+j] = 0;
-            if (newIm[iw*i+j] > 160) newIm[iw*i+j] = 255;
+            if (MyImage[iw*i+j] < 100) MyImage[iw*i+j] = 0;
+            if (MyImage[iw*i+j] > 160) MyImage[iw*i+j] = 255;
         }
     }
-
+/*
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
         for (j = 2; j < iw - 1; j++) {
@@ -79,7 +79,7 @@ int main() {
             MyImage[iw*i+j] = s;
         }
     }
-
+*/
     //only Gauss
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
