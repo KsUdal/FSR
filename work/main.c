@@ -43,8 +43,8 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
 int main() {
 
     // строка, путь к файлу
-    //char*inputPath = "hampster.png";
-    char*inputPath = "tooth.png";
+    char*inputPath = "hampster.png";
+    //char*inputPath = "tooth.png";
     //char*inputPath = "arm_break.png";
     //char*inputPath = "Arrow_head.png";
     int iw, ih, n; //ширина, высота и количество цветовых каналов
@@ -62,7 +62,8 @@ int main() {
     unsigned char* odata = (unsigned char*)malloc(ih*iw*n*sizeof(unsigned char));
     unsigned char* newIm = (unsigned char*)malloc(ih*iw*sizeof(unsigned char));
     for (i = 0; i < ih*iw*n; i = i + n) {
-        MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
+        newIm[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
+        MyImage[k] = newIm[k];
         k = k + 1;
     }
 /*
@@ -75,7 +76,7 @@ int main() {
         }
     }
 */
-/*
+
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
             if (newIm[iw*i+j] < 80) newIm[iw*i+j] = 0;
@@ -92,10 +93,10 @@ int main() {
             MyImage[iw*i+j] = s;
         }
     }
-*/
+
     //only Gauss (new)
-    for (i = 1; i < ih-1; i++) {
-        for (j = 2; j < iw-1; j++) {
+    for (i = 4; i < ih-4; i++) {
+        for (j = 4; j < iw-4; j++) {
             newIm[iw*i+j] = 0.159*MyImage[iw*i+j] + 0.097*MyImage[iw*(i+1)+j] + 0.097*MyImage[iw*(i-1)+j]
             + 0.097*MyImage[iw*i+(j+1)] + 0.097*MyImage[iw*i+(j-1)]
             + 0.059*MyImage[iw*(i+1)+(j+1)] + 0.059*MyImage[iw*(i+1)+(j-1)]
@@ -132,7 +133,7 @@ int main() {
         }
     }
 */
-
+/*
     int col[iw*ih];
     for (i = 0; i < iw*ih; i++) col[i] = 0;
     k = 1;
@@ -152,19 +153,20 @@ int main() {
         odata[i*n+2] = 15*col[i]+10*col[i-1]+20*col[i+1];
         if (n == 4) odata[i*n+3] = 255;
     }
+*/
     //printf("There are %d Vs, in general: %d\n", ih*iw, ih*iw*4);
     //going back to n channels
 
     //char* outputPath = "output_arrow_head.png";
     //char* outputPath = "output_arm_break.png";
     //char* outputPath = "output_hamster.png";
-    char* outputPath = "output_tooth.png";
-    //char* outputPath = "output.png";
+    //char* outputPath = "output_tooth.png";
+    char* outputPath = "output.png";
 
     // записываем картинку
     int one = 1; int zero = 0;
-    //stbi_write_png(outputPath, iw, ih, 1, newIm, 0);
-    stbi_write_png(outputPath, iw, ih, n, odata, 0);
+    stbi_write_png(outputPath, iw, ih, 1, newIm, 0);
+    //stbi_write_png(outputPath, iw, ih, n, odata, 0);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
