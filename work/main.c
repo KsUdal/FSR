@@ -37,7 +37,7 @@ int main() {
         MyImage[k] = 0.299*idata[i] + 0.587*idata[i + 1] + 0.114*idata[i + 2];
         k = k + 1;
     }
-/*
+
     //preparation
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
@@ -45,8 +45,8 @@ int main() {
             if (MyImage[iw*i+j] > 160) MyImage[iw*i+j] = 255;
         }
     }
-*/
-/*
+
+
     //Filter operators
     unsigned char x, y, s;
     for (i = 2; i < ih - 1; i++) {
@@ -58,8 +58,8 @@ int main() {
             odata[iw*i+j] = s;
         }
     }
-*/
-/*
+
+
     //coloring to improve contrast
     for (i = 2; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
@@ -77,19 +77,19 @@ int main() {
             newIm[i] = odata[i];
         }
     }
-*/
-/*
+
+
     //Gauss
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            MyImage[iw*i+j] = 0.0707355*newIm[iw*i+j] + 0.0566406*newIm[iw*(i+1)+j] + 0.0566406*newIm[iw*(i-1)+j];
-            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0566406*newIm[iw*i+(j+1)] + 0.0566406*newIm[iw*i+(j-1)];
-            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0453542*newIm[iw*(i+1)+(j+1)] + 0.0453542*newIm[iw*(i+1)+(j-1)];
-            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0453542*newIm[iw*(i-1)+(j+1)] + 0.0453542*newIm[iw*(i-1)+(j-1)];
+            MyImage[iw*i+j] = 0.1538*newIm[iw*i+j] + 0.1192*newIm[iw*(i+1)+j] + 0.1192*newIm[iw*(i-1)+j];
+            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.1192*newIm[iw*i+(j+1)] + 0.1192*newIm[iw*i+(j-1)];
+            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0924*newIm[iw*(i+1)+(j+1)] + 0.0924*newIm[iw*(i+1)+(j-1)];
+            MyImage[iw*i+j] = MyImage[iw*i+j] + 0.0924*newIm[iw*(i-1)+(j+1)] + 0.0924*newIm[iw*(i-1)+(j-1)];
         }
     }
-*/
 
+/*
     //only Gauss
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
@@ -99,7 +99,7 @@ int main() {
             newIm[iw*i+j] = newIm[iw*i+j] + 0.0453542*MyImage[iw*(i-1)+(j+1)] + 0.0453542*MyImage[iw*(i-1)+(j-1)];
         }
     }
-
+*/
     //char* outputPath = "output_arrow_head.png";
     //char* outputPath = "output_arm_break.png";
     //char* outputPath = "output_hamster.png";
@@ -108,7 +108,7 @@ int main() {
 
     // записываем картинку
     int one = 1; int zero = 0;
-    stbi_write_png(outputPath, iw, ih, one, newIm, zero);
+    stbi_write_png(outputPath, iw, ih, one, MyImage, zero);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
