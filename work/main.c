@@ -59,26 +59,7 @@ int main() {
         }
     }
 */
-/*
-    //coloring to improve contrast
-    for (i = 2; i < ih-1; i++) {
-        for (j = 2; j < iw-1; j++) {
-            if (odata[iw*i+j] < 40) odata[iw*i+j] = 0;
-            if (odata[iw*i+j] > 210) odata[iw*i+j] = 255;
-        }
-    }
-*/
-/*
-    //third image craetion
-    for (i = 0; i < ih*iw; i++) {
-        if (MyImage[i] > odata[i]) {
-            newIm[i] = MyImage[i];
-        }
-        else {
-            newIm[i] = odata[i];
-        }
-    }
-*/
+
 
     //only Gauss
     for (i = 1; i < ih-1; i++) {
@@ -93,7 +74,7 @@ int main() {
     //contrast again
     for (i = 0; i < ih*iw; i++) {
         if (newIm[i] < 20) newIm[i] = 0;
-        if (newIm[i] > 65) newIm[i] = 255;
+        if (newIm[i] > 90) newIm[i] = 255;
         if ((newIm[i] != 0) && (newIm[i] != 255)) newIm[i] = 100;
     }
 
