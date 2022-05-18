@@ -93,15 +93,20 @@ int main() {
         }
     }
 */
-    //only Gauss
+    //only Gauss (new)
     for (i = 1; i < ih-1; i++) {
         for (j = 2; j < iw-1; j++) {
-            newIm[iw*i+j] = 0.16*MyImage[iw*i+j] + 0.26*MyImage[iw*(i+1)+j] + 0.26*MyImage[iw*(i-1)+j];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.25*MyImage[iw*i+(j+1)] + 0.26*MyImage[iw*i+(j-1)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.09*MyImage[iw*(i+1)+(j+1)] + 0.09*MyImage[iw*(i+1)+(j-1)];
-            newIm[iw*i+j] = newIm[iw*i+j] + 0.09*MyImage[iw*(i-1)+(j+1)] + 0.09*MyImage[iw*(i-1)+(j-1)];
+            newIm[iw*i+j] = 0.159*MyImage[iw*i+j] + 0.097*MyImage[iw*(i+1)+j] + 0.097*MyImage[iw*(i-1)+j];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.097*MyImage[iw*i+(j+1)] + 0.097*MyImage[iw*i+(j-1)];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.059*MyImage[iw*(i+1)+(j+1)] + 0.059*MyImage[iw*(i+1)+(j-1)];
+            newIm[iw*i+j] = newIm[iw*i+j] + 0.059*MyImage[iw*(i-1)+(j+1)] + 0.059*MyImage[iw*(i-1)+(j-1)];
         }
     }
+/*
+    //need to make it more contrast
+    for (i = 0; i < iw*ih; i++) {
+        if (newIm[i[
+*/
 /*
 //Filter operators
     unsigned char x, y, s;
