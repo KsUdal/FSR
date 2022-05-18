@@ -21,11 +21,12 @@ void dfs(int v, int color, int iw, int ih, int* col, unsigned char* mat) {
         l = mat[v-1];
         if ((col[v-1] == 0) && (abs(mat[v] - l) < 30)) dfs(v-1, color, iw, ih, col, mat);
     }
+*/
     if (v-iw > 0) {
         u = mat[v-iw];
         if ((col[v-iw] == 0) && (abs(mat[v] - u) < 30)) dfs(v-iw, color, iw, ih, col, mat);
     }
-    */
+
     if (v+iw < ih*iw) {
         d = mat[v+iw];
         if ((col[v+iw] == 0) && (abs(mat[v] - d) < 1)) dfs(v+iw, color, iw, ih, col, mat);
@@ -128,7 +129,7 @@ int main() {
 
     // записываем картинку
     int one = 1; int zero = 0;
-    stbi_write_png(outputPath, iw, ih, one, newIm, 0);
+    stbi_write_png(outputPath, iw, ih, n, odata, 0);
     //stbi_image_write(outputPath, iw, ih, 2, MyImage, 0);
     //printf("Изображение размера %d в высоту и %d в ширину с количеством каналов %d считано", ih, iw, n);
     stbi_image_free(idata);
