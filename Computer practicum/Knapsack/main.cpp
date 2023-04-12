@@ -31,14 +31,7 @@ int main() {
     // $ minizinc --solver Gecode solver.mzn data.dzn (for console)
     // how to make it here?
 
-    int sol = system("minizinc --solver Gecode solver.mzn data.dzn");
-    //system(ls);
-
-    cout << sol;
-
-   //MznSolver slv(std::cout,std::cerr);
-    //vector<std::string> options({"--stdlib-dir", "--solver", "org.gecode.gecode"});
-    //slv.run(options, modelString, "minizinc", "solver.mzn");
+    system("minizinc --solver Gecode solver.mzn data.dzn");
 
     return 0;
 }
