@@ -31,7 +31,8 @@ int main() {
     // $ minizinc --solver Gecode solver.mzn data.dzn (for console)
     // how to make it here?
 
-    system("minizinc --solver Gecode solver.mzn data.dzn");
+    //system("minizinc --solver Gecode solver.mzn data.dzn");
+    system("minizinc --solver Gecode solver.mzn data.dzn output.log");
 
     return 0;
 }
