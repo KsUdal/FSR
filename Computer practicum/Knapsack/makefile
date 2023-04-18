@@ -1,9 +1,8 @@
-all: main.o solver.o
+all: main.o
+	g++ main.o -o main
 
 main.o: main.cpp
 	g++ -c main.cpp
-solver.o: solver.mzn
-	minizinc --solver Gecode solver.mzn
 
 clean:
-	rm *o
+	rm *.o main

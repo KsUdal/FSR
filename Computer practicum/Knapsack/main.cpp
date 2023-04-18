@@ -32,7 +32,66 @@ int main() {
     // how to make it here?
 
     //system("minizinc --solver Gecode solver.mzn data.dzn");
-    system("minizinc --solver Gecode solver.mzn data.dzn output.log");
+    system("minizinc --solver Gecode solver.mzn data.dzn > output.log");
+
+    // making beautifull answer
+    ifstream output;
+    output.open("output.log");
+
+    char k = 'f';
+
+    vector<char> res(n);
+    i = 0;
+
+        while (k != '[') {
+            output >> k;
+        }
+        output >> k;
+
+        while (k != ']') {
+            if ((k == '1') || (k == '0')) {
+                res[i] = k;
+                i = i + 1;
+            }
+            output >> k;
+        }
+
+
+    vector<char> sol(10);
+    i = 0;
+    while (k != '=') {
+        output >> k;
+    }
+    output >> k;
+    while (k != ';') {
+        sol[i] = k;
+        i = i + 1;
+        output >> k;
+    }
+    int soln = i;
+
+    vector<char> spaceleft(10);
+    i = 0;
+    while (k != '=') {
+        output >> k;
+    }
+
+    output >> k;
+    while (k != ';') {
+        spaceleft[i] = k;
+        i = i + 1;
+        output >> k;
+    }
+    int sln = i;
+
+    output.close();
+
+    for (i = 0; i < soln; i++) cout << sol[i];
+    cout << ' ';
+    for (i = 0; i < sln; i++) cout << spaceleft[i];
+    cout << endl;
+    for (i = 0; i < n; i++) cout << res[i] << ' ';
+    cout << endl;
 
     return 0;
 }
