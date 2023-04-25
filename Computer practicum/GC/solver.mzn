@@ -1,11 +1,9 @@
 include "globals.mzn";
-% include "value_precede_set.mzn";
-% include "nvalue_fn.mzn";
 
 int: n;
 int: e;
 int: maxc = 317; % Domain of colors, limits search space. Ideally maxc == 13! if you can solve it
-int: frcd; % HACK Number of colors to force to relax problem!
+% int: frcd; % HACK Number of colors to force to relax problem!
 
 array[1..e,1..2] of int: E;
 array[0..n-1] of var 0..maxc: c;   % Color of node n

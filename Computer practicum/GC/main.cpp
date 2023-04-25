@@ -20,7 +20,7 @@ int main() {
 
     data << "n = " << n << ";" << endl;
     data << "e = " << e << ";" << endl;
-    data << "frcd = 306;" << endl;
+    // data << "frcd = 306;" << endl;
     data << "E = [";
     for (i = 0; i < e; i++) data << "| " << E1[i] << " , " << E2[i] << "," << endl;
     data << "|];" << endl;
