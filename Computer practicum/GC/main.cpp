@@ -27,8 +27,42 @@ int main() {
 
     data.close();
 
-    system("minizinc --solver Gecode solver.mzn data.dzn");
-    //system("minizinc --solver Gecode solver.mzn data.dzn > output.log");
+    //system("minizinc --solver Gecode solver.mzn data.dzn");
+    system("minizinc --solver Gecode solver.mzn data.dzn > output.log");
+
+    ifstream output;
+    output.open("output.log");
+
+    char k = 'f';
+
+    vector<char> sol(5);
+
+    output >> k;
+    i = 0;
+    while (k != '[') {
+        sol[i] = k;
+        i = i + 1;
+        output >> k;
+    }
+    int soln = i;
+
+    vector<char> res(n);
+
+    i = 0;
+    while (k != ']') {
+        if ((k >= '0') && (k <= '9')) {
+            res[i] = k;
+            i = i + 1;
+        }
+        output >> k;
+    }
+
+    output.close();
+
+    for (i = 0; i < soln; i++) cout << sol[i];
+    cout << endl;
+    for (i = 0; i < n; i++) cout << res[i] << ' ';
+    cout << endl;
 
     return 0;
 }
